@@ -15,7 +15,7 @@ public class LoginFormGuest {
 
     public LoginFormGuest() {
         loginFrame = new JFrame("Guest Login");
-        JPanel loginPanel = new JPanel(new GridLayout(3, 2, 10, 10));
+        JPanel loginPanel = new JPanel(new GridLayout(4, 2, 10, 10));
 
         JLabel usernameLabel = new JLabel("Username:");
         JLabel passwordLabel = new JLabel("Password:");
@@ -50,12 +50,25 @@ public class LoginFormGuest {
             }
         });
 
+        JButton adminLoginButton = new JButton("Login as Admin");
+        adminLoginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loginFrame.dispose();
+                LoginFormAdmin loginFormAdmin = new LoginFormAdmin();
+                loginFormAdmin.showLoginForm();
+            }
+        });
+
         loginPanel.add(usernameLabel);
         loginPanel.add(usernameField);
         loginPanel.add(passwordLabel);
         loginPanel.add(passwordField);
         loginPanel.add(new JLabel()); // Empty label for spacing
         loginPanel.add(loginButton);
+
+        loginPanel.add(new JLabel()); // Empty label for spacing
+        loginPanel.add(adminLoginButton);
 
         loginFrame.add(loginPanel);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
