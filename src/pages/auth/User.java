@@ -1,4 +1,4 @@
-package auth;
+package pages.auth;
 
 public class User {
     private int id;

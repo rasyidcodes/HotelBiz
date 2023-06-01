@@ -1,4 +1,4 @@
-package auth;
+package pages.auth;
 
 import config.DatabaseConnector;
 
@@ -7,14 +7,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-public class LoginFormAdmin {
+public class LoginFormGuest {
     private JFrame loginFrame;
     private JTextField usernameField;
     private JPasswordField passwordField;
 
-    public LoginFormAdmin() {
-        loginFrame = new JFrame("Admin Login");
+    public LoginFormGuest() {
+        loginFrame = new JFrame("Guest Login");
         JPanel loginPanel = new JPanel(new GridLayout(4, 2, 10, 10));
 
         JLabel usernameLabel = new JLabel("Username:");
@@ -23,7 +22,7 @@ public class LoginFormAdmin {
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
 
-        JButton loginButton = new JButton("Login as Admin");
+        JButton loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -31,30 +30,32 @@ public class LoginFormAdmin {
                 char[] password = passwordField.getPassword();
 
                 // Create an instance of the GuestAuthProvider and authenticate the user
-                AuthProvider authProvider = new AdminAuthProvider(new DatabaseConnector());
-                Admin user = (Admin) authProvider.authenticate(username, new String(password));
+                AuthProvider authProvider = new GuestAuthProvider(new DatabaseConnector());
+                Guest user = (Guest) authProvider.authenticate(username, new String(password));
 
                 if (user != null) {
                     // Authentication successful
-                    JOptionPane.showMessageDialog(loginFrame, "Login successful!\nWelcome, " + user.getAccessLevel(),
+                    JOptionPane.showMessageDialog(loginFrame, "Login successful!\nWelcome, " + user.getGuestType(),
                             "Success", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     // Authentication failed
                     JOptionPane.showMessageDialog(loginFrame, "Invalid username or password!", "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
+
+                // Clear the input fields after login attempt
                 usernameField.setText("");
                 passwordField.setText("");
             }
         });
 
-        JButton guestLoginButton = new JButton("Login as Guest");
-        guestLoginButton.addActionListener(new ActionListener() {
+        JButton adminLoginButton = new JButton("Login as Admin");
+        adminLoginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loginFrame.dispose();
-                LoginFormGuest loginFormGuest = new LoginFormGuest();
-                loginFormGuest.showLoginForm();
+                LoginFormEmployee loginFormEmployee = new LoginFormEmployee();
+                loginFormEmployee.showLoginForm();
             }
         });
 
@@ -64,8 +65,9 @@ public class LoginFormAdmin {
         loginPanel.add(passwordField);
         loginPanel.add(new JLabel()); // Empty label for spacing
         loginPanel.add(loginButton);
+
         loginPanel.add(new JLabel()); // Empty label for spacing
-        loginPanel.add(guestLoginButton);
+        loginPanel.add(adminLoginButton);
 
         loginFrame.add(loginPanel);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,8 +82,8 @@ public class LoginFormAdmin {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                LoginFormAdmin loginFormAdmin = new LoginFormAdmin();
-                loginFormAdmin.showLoginForm();
+                LoginFormGuest loginFormGuest = new LoginFormGuest();
+                loginFormGuest.showLoginForm();
             }
         });
     }

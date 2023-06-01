@@ -1,11 +1,11 @@
-package auth;
+package pages.auth;
 
-public class Admin extends User {
+public class Employee extends User {
     private double salary;
     private int accessLevel;
 
-    public Admin(int id, String username, String password, String email, String fullName, String dateOfBirth,
-                 String gender, double salary, int accessLevel) {
+    public Employee(int id, String username, String password, String email, String fullName, String dateOfBirth,
+                    String gender, double salary, int accessLevel) {
         super(id, username, password, email, fullName, dateOfBirth, gender);
         this.salary = salary;
         this.accessLevel = accessLevel;

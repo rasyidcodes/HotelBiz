@@ -1,4 +1,4 @@
-package auth;
+package pages.auth;
 
 import config.DatabaseConnector;
 
@@ -6,15 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 
-public class LoginFormGuest {
+
+public class LoginFormEmployee {
     private JFrame loginFrame;
     private JTextField usernameField;
     private JPasswordField passwordField;
 
-    public LoginFormGuest() {
-        loginFrame = new JFrame("Guest Login");
+    public LoginFormEmployee() {
+        loginFrame = new JFrame("Employee");
         JPanel loginPanel = new JPanel(new GridLayout(4, 2, 10, 10));
 
         JLabel usernameLabel = new JLabel("Username:");
@@ -23,7 +23,7 @@ public class LoginFormGuest {
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
 
-        JButton loginButton = new JButton("Login");
+        JButton loginButton = new JButton("Login as Employee");
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -31,32 +31,35 @@ public class LoginFormGuest {
                 char[] password = passwordField.getPassword();
 
                 // Create an instance of the GuestAuthProvider and authenticate the user
-                AuthProvider authProvider = new GuestAuthProvider(new DatabaseConnector());
-                Guest user = (Guest) authProvider.authenticate(username, new String(password));
+                AuthProvider authProvider = new EmployeeAuthProvider(new DatabaseConnector());
+                Employee user = (Employee) authProvider.authenticate(username, new String(password));
 
                 if (user != null) {
                     // Authentication successful
-                    JOptionPane.showMessageDialog(loginFrame, "Login successful!\nWelcome, " + user.getGuestType(),
+                    String role = null;
+                    if (user.getAccessLevel() == 1){
+                        role = "admin";
+                    }
+                    
+                    JOptionPane.showMessageDialog(loginFrame, "Login successful!\nWelcome, " + role,
                             "Success", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     // Authentication failed
                     JOptionPane.showMessageDialog(loginFrame, "Invalid username or password!", "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
-
-                // Clear the input fields after login attempt
                 usernameField.setText("");
                 passwordField.setText("");
             }
         });
 
-        JButton adminLoginButton = new JButton("Login as Admin");
-        adminLoginButton.addActionListener(new ActionListener() {
+        JButton guestLoginButton = new JButton("Login as Guest");
+        guestLoginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loginFrame.dispose();
-                LoginFormAdmin loginFormAdmin = new LoginFormAdmin();
-                loginFormAdmin.showLoginForm();
+                LoginFormGuest loginFormGuest = new LoginFormGuest();
+                loginFormGuest.showLoginForm();
             }
         });
 
@@ -66,9 +69,8 @@ public class LoginFormGuest {
         loginPanel.add(passwordField);
         loginPanel.add(new JLabel()); // Empty label for spacing
         loginPanel.add(loginButton);
-
         loginPanel.add(new JLabel()); // Empty label for spacing
-        loginPanel.add(adminLoginButton);
+        loginPanel.add(guestLoginButton);
 
         loginFrame.add(loginPanel);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,8 +85,8 @@ public class LoginFormGuest {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                LoginFormGuest loginFormGuest = new LoginFormGuest();
-                loginFormGuest.showLoginForm();
+                LoginFormEmployee loginFormEmployee = new LoginFormEmployee();
+                loginFormEmployee.showLoginForm();
             }
         });
     }

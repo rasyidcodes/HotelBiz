@@ -1,6 +1,6 @@
 
 
-import auth.LoginFormGuest;
+import pages.auth.LoginFormGuest;
 
 import javax.swing.*;
 import java.awt.*;

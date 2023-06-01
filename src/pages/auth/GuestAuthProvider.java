@@ -1,4 +1,4 @@
-package auth;
+package pages.auth;
 
 import config.DatabaseConnector;
 

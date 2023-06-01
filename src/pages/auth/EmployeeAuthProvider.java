@@ -1,4 +1,4 @@
-package auth;
+package pages.auth;
 
 import config.DatabaseConnector;
 
@@ -7,17 +7,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AdminAuthProvider  implements  AuthProvider{
+public class EmployeeAuthProvider implements  AuthProvider{
 
     private DatabaseConnector databaseConnector;
 
-    public AdminAuthProvider(DatabaseConnector databaseConnector) {
+    public EmployeeAuthProvider(DatabaseConnector databaseConnector) {
         this.databaseConnector = databaseConnector;
     }
 
     @Override
     public User authenticate(String username, String password) {
-        Admin admin = null;
+        Employee employee = null;
 
         Connection connection = null;
         PreparedStatement statement = null;
@@ -27,7 +27,7 @@ public class AdminAuthProvider  implements  AuthProvider{
             connection = databaseConnector.getConnection(); // Get the database connection
 
             // Prepare the SQL statement to retrieve the user object
-            String sql = "SELECT * FROM admin WHERE username = ? AND password = ?";
+            String sql = "SELECT * FROM employee WHERE username = ? AND password = ?";
             statement = connection.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
@@ -46,7 +46,7 @@ public class AdminAuthProvider  implements  AuthProvider{
                 int accessLevel =  resultSet.getInt("accessLevel");
 
                 // Create a User object
-                admin = new Admin(id, username,password,email, fullName, dateOfBirth, gender, salary, accessLevel);
+                employee = new Employee(id, username,password,email, fullName, dateOfBirth, gender, salary, accessLevel);
 
             }
 
@@ -57,6 +57,6 @@ public class AdminAuthProvider  implements  AuthProvider{
             databaseConnector.closeResources(resultSet, statement, connection);
         }
 
-        return admin;
+        return employee;
     }
 }
