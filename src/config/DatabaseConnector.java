@@ -2,11 +2,13 @@ package config;
 
 import java.sql.*;
 
+
 public class DatabaseConnector {
     private final String url = "jdbc:mysql://localhost:3306/hotelbiz";
     private final String username = "root";
     private final String password = "";
     private Connection connection;
+
 
     public DatabaseConnector() {
         try {
