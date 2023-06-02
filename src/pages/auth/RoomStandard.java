@@ -9,7 +9,6 @@ import config.DatabaseConnector;
 
 public class RoomStandard extends Room{
 
-
       // mengacu pada tabel standard room
       private int id; // primary key tabel standard room
       private int roomTypeId; // foreign key tabel standard room refer to id dari tabel roomType
@@ -56,7 +55,7 @@ public class RoomStandard extends Room{
         }
 
       public void display(){
-            System.out.println("Room Name " + getRoomName());
+            System.out.println("Room Name : " + getRoomName());
             System.out.println("Bed Type : " + getBedType());
             System.out.println("Price : " + getPrice());
 
