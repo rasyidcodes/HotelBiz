@@ -115,11 +115,6 @@ public class RoomStandard extends Room{
       public void setWifi(boolean wifi) {
             this.wifi = wifi;
       }
-
-
-
-
-
       
 }
 

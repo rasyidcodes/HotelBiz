@@ -1,4 +1,4 @@
-package pages.auth;
+package pages.hotel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

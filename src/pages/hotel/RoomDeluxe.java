@@ -1,4 +1,4 @@
-package pages.auth;
+package pages.hotel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -132,6 +132,4 @@ public class RoomDeluxe extends RoomPremium {
             this.luxuryBathub = luxuryBathub;
       }
 
-
-      
 }
