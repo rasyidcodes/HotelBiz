@@ -13,6 +13,14 @@ public class RoomPremium extends RoomStandard {
       private boolean television; 
       private boolean fitnessCenter; 
       private boolean minibar; 
+
+      public RoomPremium() {
+            super(2);
+      }
+
+      protected RoomPremium(int roomType){
+            super(roomType);
+      }
       
       @Override
       public void retrieveDataFromDB(int roomNumber) {
@@ -23,20 +31,8 @@ public class RoomPremium extends RoomStandard {
         
             try {
                   connection = databaseConnector.getConnection(); // Get the database connection
-                  String sql = "SELECT * FROM roomtype where roomtype_id = 2"; 
-                  statement = connection.prepareStatement(sql);
-                  resultSet = statement.executeQuery();
-                  if (resultSet.next()){
-                        setRoomName( resultSet.getString("roomName"));
-                        setBedType(resultSet.getString("bedType"));
-                        setPrice(resultSet.getDouble("price"));
-                  }
-
-                  statement.close();
-                  resultSet.close();
-
-                  String sql2 = "SELECT * FROM premiumroom where roomNumber = " + roomNumber ; 
-                  statement = connection.prepareStatement(sql2); 
+                  String sql = "SELECT * FROM premiumroom where roomNumber = " + roomNumber ; 
+                  statement = connection.prepareStatement(sql); 
                   resultSet = statement.executeQuery();
                   if (resultSet.next()){
                         setId(resultSet.getInt("id"));
@@ -60,7 +56,7 @@ public class RoomPremium extends RoomStandard {
 
         @Override
         public void display(){
-            System.out.println("Room Name " + getRoomName());
+            System.out.println("Room Name : " + getRoomName());
             System.out.println("Bed Type : " + getBedType());
             System.out.println("Price : " + getPrice());
             

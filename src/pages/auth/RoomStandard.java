@@ -7,11 +7,8 @@ import java.sql.SQLException;
 
 import config.DatabaseConnector;
 
-public class RoomStandard implements RoomInterface {
-      // mengacu pada tabel roomType
-      private String roomName; 
-      private String bedType; 
-      private Double price;
+public class RoomStandard extends Room{
+
 
       // mengacu pada tabel standard room
       private int id; // primary key tabel standard room
@@ -20,6 +17,14 @@ public class RoomStandard implements RoomInterface {
       private boolean availability;
       private boolean freeSnack; 
       private boolean wifi;
+
+      public RoomStandard() {
+            super(3);
+      }
+
+      protected RoomStandard(int roomType) {
+            super(roomType);
+      }
 
       public void retrieveDataFromDB(int roomNumber) {
             DatabaseConnector databaseConnector = new DatabaseConnector();
@@ -30,20 +35,8 @@ public class RoomStandard implements RoomInterface {
         
             try {
                   connection = databaseConnector.getConnection(); // Get the database connection
-                  String sql = "SELECT * FROM roomtype where roomtype_id = 3"; 
-                  statement = connection.prepareStatement(sql);
-                  resultSet = statement.executeQuery();
-                  if (resultSet.next()){
-                        this.roomName = resultSet.getString("roomName");
-                        this.bedType = resultSet.getString("bedType");
-                        this.price = resultSet.getDouble("price"); 
-                  }
-
-                  statement.close();
-                  resultSet.close();
-
-                  String sql2 = "SELECT * FROM standardroom where roomNumber = " + roomNumber; 
-                  statement = connection.prepareStatement(sql2); 
+                  String sql = "SELECT * FROM standardroom where roomNumber = " + roomNumber; 
+                  statement = connection.prepareStatement(sql); 
                   resultSet = statement.executeQuery();
                   if (resultSet.next()){
                         this.id = resultSet.getInt("id"); 
@@ -62,9 +55,8 @@ public class RoomStandard implements RoomInterface {
             }
         }
 
-        @Override
       public void display(){
-            System.out.println("Room Name : " + getRoomName());
+            System.out.println("Room Name " + getRoomName());
             System.out.println("Bed Type : " + getBedType());
             System.out.println("Price : " + getPrice());
 
@@ -76,29 +68,6 @@ public class RoomStandard implements RoomInterface {
             System.out.println("Wifi : " + isWifi());
       }
 
-      public String getRoomName() {
-            return roomName;
-      }
-
-      public void setRoomName(String roomName) {
-            this.roomName = roomName;
-      }
-
-      public String getBedType() {
-            return bedType;
-      }
-
-      public void setBedType(String bedType) {
-            this.bedType = bedType;
-      }
-
-      public Double getPrice() {
-            return price;
-      }
-
-      public void setPrice(Double price) {
-            this.price = price;
-      }
 
       public int getId() {
             return id;
@@ -147,6 +116,7 @@ public class RoomStandard implements RoomInterface {
       public void setWifi(boolean wifi) {
             this.wifi = wifi;
       }
+
 
 
 

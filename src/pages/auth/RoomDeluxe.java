@@ -16,6 +16,10 @@ public class RoomDeluxe extends RoomPremium {
       private boolean privateSwimming; 
       private boolean luxuryBathub; 
 
+      public RoomDeluxe() {
+            super(1);
+      }
+
       @Override
       public void retrieveDataFromDB(int roomNumber) {
             DatabaseConnector databaseConnector = new DatabaseConnector();
@@ -25,18 +29,6 @@ public class RoomDeluxe extends RoomPremium {
         
             try {
                   connection = databaseConnector.getConnection(); // Get the database connection
-                  String sql = "SELECT * FROM roomtype where roomtype_id = 1"; 
-                  statement = connection.prepareStatement(sql);
-                  resultSet = statement.executeQuery();
-                  if (resultSet.next()){
-                        setRoomName( resultSet.getString("roomName"));
-                        setBedType(resultSet.getString("bedType"));
-                        setPrice(resultSet.getDouble("price"));
-                  }
-
-                  statement.close();
-                  resultSet.close();
-
                   String sql2 = "SELECT * FROM deluxeroom where roomNumber = " + roomNumber ; 
                   statement = connection.prepareStatement(sql2); 
                   resultSet = statement.executeQuery();
