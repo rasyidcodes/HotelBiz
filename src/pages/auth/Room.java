@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import config.DatabaseConnector;
 
-public abstract class Room {
+public class Room {
       // mengacu pada tabel roomType
       private String roomName; 
       private String bedType; 

@@ -29,8 +29,8 @@ public class RoomDeluxe extends RoomPremium {
         
             try {
                   connection = databaseConnector.getConnection(); // Get the database connection
-                  String sql2 = "SELECT * FROM deluxeroom where roomNumber = " + roomNumber ; 
-                  statement = connection.prepareStatement(sql2); 
+                  String sql = "SELECT * FROM deluxeroom where roomNumber = " + roomNumber ; 
+                  statement = connection.prepareStatement(sql); 
                   resultSet = statement.executeQuery();
                   if (resultSet.next()){
                         setId(resultSet.getInt("id"));
