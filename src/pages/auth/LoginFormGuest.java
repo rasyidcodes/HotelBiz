@@ -1,6 +1,7 @@
 package pages.auth;
 
 import config.DatabaseConnector;
+import pages.guest.orderFood.OrderFood;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,8 +36,11 @@ public class LoginFormGuest {
 
                 if (user != null) {
                     // Authentication successful
-                    JOptionPane.showMessageDialog(loginFrame, "Login successful!\nWelcome, " + user.getGuestType(),
+                    JOptionPane.showMessageDialog(loginFrame, "Login successful!\nWelcome, " + user.getFullName(),
                             "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                    // Display the next form
+//                    nextForm.setVisible(true);
                 } else {
                     // Authentication failed
                     JOptionPane.showMessageDialog(loginFrame, "Invalid username or password!", "Error",

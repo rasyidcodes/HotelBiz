@@ -42,7 +42,7 @@ public class Main extends JFrame {
         splashFrame.setBounds(x, y, splashWidth, splashHeight);
 
         // Create a JLabel with an image for the splash screen
-        URL imageURL =  Main.class.getResource("/src/logo_splash.png");
+        URL imageURL =  Main.class.getResource("/drawable/logo_splash.png");
         ImageIcon splashImageIcon = new ImageIcon(imageURL);
         JLabel splashLabel = new JLabel(splashImageIcon);
 
