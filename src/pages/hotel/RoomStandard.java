@@ -1,120 +1,88 @@
 package pages.hotel;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-import config.DatabaseConnector;
 
 public class RoomStandard extends Room{
 
-      // mengacu pada tabel standard room
-      private int id; // primary key tabel standard room
-      private int roomTypeId; // foreign key tabel standard room refer to id dari tabel roomType
+      private int id; // id kamar mengacu pada database standardroom
+
       private int roomNumber; // nomor kamar 
-      private boolean availability;
-      private boolean freeSnack; 
-      private boolean wifi;
+      private String availability;
 
-      public RoomStandard() {
-            super(3);
-      }
+      private String freeSnack; 
+      private String wifi;
 
-      protected RoomStandard(int roomType) {
-            super(roomType);
-      }
-
-      public void retrieveDataFromDB(int roomNumber) {
-            DatabaseConnector databaseConnector = new DatabaseConnector();
-            Connection connection = null;
-
-            PreparedStatement statement = null;
-            ResultSet resultSet = null;
-        
-            try {
-                  connection = databaseConnector.getConnection(); // Get the database connection
-                  String sql = "SELECT * FROM standardroom where roomNumber = " + roomNumber; 
-                  statement = connection.prepareStatement(sql); 
-                  resultSet = statement.executeQuery();
-                  if (resultSet.next()){
-                        this.id = resultSet.getInt("id"); 
-                        this.roomTypeId = resultSet.getInt("roomtype_id"); 
-                        this.roomNumber = resultSet.getInt("roomNumber"); 
-                        this.availability = resultSet.getBoolean("availability"); 
-                        this.freeSnack = resultSet.getBoolean("freeSnack");
-                        this.wifi = resultSet.getBoolean("wifi"); 
-                  } 
-                  
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                // Close the database resources
-                databaseConnector.closeResources(resultSet, statement, connection);
-            }
-        }
-
-      public void display(){
-            System.out.println("Room Name : " + getRoomName());
-            System.out.println("Bed Type : " + getBedType());
-            System.out.println("Price : " + getPrice());
-
-            System.out.println(getRoomName() + " Room Id : " + getId());
-            System.out.println("Room Type : " + getRoomTypeId());
-            System.out.println("Room Number : " + getRoomNumber());
-            System.out.println("Room Availability : " +isAvailability());
-            System.out.println("Snack : " + isFreeSnack());
-            System.out.println("Wifi : " + isWifi());
+      @Override
+      public String getDescription() {
+      return "RoomStandard [\n"
+            + "id=" + id + ",\n"
+            + "roomNumber=" + roomNumber + ",\n"
+            + "availability=" + availability + ",\n"
+            + "freeSnack=" + freeSnack + ",\n"
+            + "wifi=" + wifi + "\n"
+            + "]";
       }
 
 
+      public RoomStandard(int roomTypeId, String roomName, String bedType, Double price,int id, int roomNumber,
+                  String availability, String freeSnack, String wifi) {
+            super(roomTypeId, roomName, bedType, price);
+            this.id = id; 
+            this.roomNumber = roomNumber;
+            this.availability = availability;
+            this.freeSnack = freeSnack;
+            this.wifi = wifi;
+      }
+
+      
       public int getId() {
             return id;
       }
+
 
       public void setId(int id) {
             this.id = id;
       }
 
-      public int getRoomTypeId() {
-            return roomTypeId;
-      }
-
-      public void setRoomTypeId(int roomTypeId) {
-            this.roomTypeId = roomTypeId;
-      }
 
       public int getRoomNumber() {
             return roomNumber;
       }
 
+
       public void setRoomNumber(int roomNumber) {
             this.roomNumber = roomNumber;
       }
 
-      public boolean isAvailability() {
+
+      public String getAvailability() {
             return availability;
       }
 
-      public void setAvailability(boolean availability) {
+
+      public void setAvailability(String availability) {
             this.availability = availability;
       }
 
-      public boolean isFreeSnack() {
+
+      public String getFreeSnack() {
             return freeSnack;
       }
 
-      public void setFreeSnack(boolean freeSnack) {
+
+      public void setFreeSnack(String freeSnack) {
             this.freeSnack = freeSnack;
       }
 
-      public boolean isWifi() {
+
+      public String getWifi() {
             return wifi;
       }
 
-      public void setWifi(boolean wifi) {
+
+      public void setWifi(String wifi) {
             this.wifi = wifi;
       }
-      
+
 }
 

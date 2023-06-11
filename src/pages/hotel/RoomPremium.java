@@ -1,103 +1,113 @@
 package pages.hotel;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-import config.DatabaseConnector;
 
-public class RoomPremium extends RoomStandard {
+public class RoomPremium extends Room {
+
+      private int id; // id kamar mengacu pada database premmiumroom
+
+      private int roomNumber; // nomor kamar 
+      private String availability;
+
+      private String freeSnack; 
+      private String wifi;
       
-      // megacu pada tabel StandardRoom 
-      private boolean television; 
-      private boolean fitnessCenter; 
-      private boolean minibar; 
-
-      public RoomPremium() {
-            super(2);
-      }
-
-      protected RoomPremium(int roomType){
-            super(roomType);
-      }
-      
-      @Override
-      public void retrieveDataFromDB(int roomNumber) {
-            DatabaseConnector databaseConnector = new DatabaseConnector();
-            Connection connection = null;
-            PreparedStatement statement = null;
-            ResultSet resultSet = null;
-        
-            try {
-                  connection = databaseConnector.getConnection(); // Get the database connection
-                  String sql = "SELECT * FROM premiumroom where roomNumber = " + roomNumber ; 
-                  statement = connection.prepareStatement(sql); 
-                  resultSet = statement.executeQuery();
-                  if (resultSet.next()){
-                        setId(resultSet.getInt("id"));
-                        setRoomTypeId(resultSet.getInt("roomtype_id"));
-                        setRoomNumber(resultSet.getInt("roomNumber"));
-                        setAvailability(resultSet.getBoolean("availability"));
-                        setFreeSnack(resultSet.getBoolean("freeSnack"));
-                        setWifi(resultSet.getBoolean("wifi"));
-                        this.television = resultSet.getBoolean("television"); 
-                        this.fitnessCenter = resultSet.getBoolean("fitnessCenter"); 
-                        this.minibar = resultSet.getBoolean("minibar");
-                  }
-                  
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                // Close the database resources
-                databaseConnector.closeResources(resultSet, statement, connection);
-            }
-        }
-
-        @Override
-        public void display(){
-            System.out.println("Room Name : " + getRoomName());
-            System.out.println("Bed Type : " + getBedType());
-            System.out.println("Price : " + getPrice());
-            
-            System.out.println(getRoomName() + " Room Id : " + getId());
-            System.out.println("Room Type : " + getRoomTypeId());
-            System.out.println("Room Number : " + getRoomNumber());
-            System.out.println("Room Availability : " +isAvailability());
-            System.out.println("Snack : " + isFreeSnack());
-            System.out.println("Wifi : " + isWifi());
-
-            System.out.println("Telivision : " + isTelevision());
-            System.out.println("Fitness Center : " + isFitnessCenter());
-            System.out.println("Minibar : " + isMinibar());
-      }
+      private String television; 
+      private String  fitnessCenter; 
+      private String minibar;
 
 
-      public boolean isTelevision() {
-            return television;
-      }
-
-      public void setTelevision(boolean television) {
+      public RoomPremium(int roomTypeId, String roomName, String bedType, Double price, int id, int roomNumber,
+                  String availability, String freeSnack, String wifi, String television, String fitnessCenter,
+                  String minibar) {
+            super(roomTypeId, roomName, bedType, price);
+            this.id = id;
+            this.roomNumber = roomNumber;
+            this.availability = availability;
+            this.freeSnack = freeSnack;
+            this.wifi = wifi;
             this.television = television;
-      }
-
-      public boolean isFitnessCenter() {
-            return fitnessCenter;
-      }
-
-      public void setFitnessCenter(boolean fitnessCenter) {
             this.fitnessCenter = fitnessCenter;
-      }
-
-      public boolean isMinibar() {
-            return minibar;
-      }
-
-      public void setMinibar(boolean minibar) {
             this.minibar = minibar;
       }
 
+      @Override
+      public String getDescription() {
+      return "RoomPremium [\n"
+            + "id=" + id + ",\n"
+            + "roomNumber=" + roomNumber + ",\n"
+            + "availability=" + availability + ",\n"
+            + "freeSnack=" + freeSnack + ",\n"
+            + "wifi=" + wifi + ",\n"
+            + "television=" + television + ",\n"
+            + "fitnessCenter=" + fitnessCenter + ",\n"
+            + "minibar=" + minibar + "\n"
+            + "]";
+      }
+      
+      public int getId() {
+            return id;
+      }
 
+      public void setId(int id) {
+            this.id = id;
+      }
+
+      public int getRoomNumber() {
+            return roomNumber;
+      }
+
+      public void setRoomNumber(int roomNumber) {
+            this.roomNumber = roomNumber;
+      }
+
+      public String getAvailability() {
+            return availability;
+      }
+
+      public void setAvailability(String availability) {
+            this.availability = availability;
+      }
+
+      public String getFreeSnack() {
+            return freeSnack;
+      }
+
+      public void setFreeSnack(String freeSnack) {
+            this.freeSnack = freeSnack;
+      }
+
+      public String getWifi() {
+            return wifi;
+      }
+
+      public void setWifi(String wifi) {
+            this.wifi = wifi;
+      }
+
+      public String getTelevision() {
+            return television;
+      }
+
+      public void setTelevision(String television) {
+            this.television = television;
+      }
+
+      public String getFitnessCenter() {
+            return fitnessCenter;
+      }
+
+      public void setFitnessCenter(String fitnessCenter) {
+            this.fitnessCenter = fitnessCenter;
+      }
+
+      public String getMinibar() {
+            return minibar;
+      }
+
+      public void setMinibar(String minibar) {
+            this.minibar = minibar;
+      }
 
 
 }

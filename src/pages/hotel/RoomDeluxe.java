@@ -1,135 +1,162 @@
 package pages.hotel;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-import config.DatabaseConnector;
+public class RoomDeluxe extends Room {
+      
+      private int id; // id kamar mengacu pada database deluxeroom
+      
+      private int roomNumber; // nomor kamar 
+      private String availability;
 
-public class RoomDeluxe extends RoomPremium {
+      private String freeSnack; 
+      private String wifi;
 
-      // megacu pada tabel DuluxeRoom 
-      private boolean inRoomBreakfastService;
-      private boolean laundry; 
-      private boolean dailyHouseKeeping;
-      private boolean privateSwimming; 
-      private boolean luxuryBathub; 
+      private String television; 
+      private String fitnessCenter; 
+      private String minibar;
 
-      public RoomDeluxe() {
-            super(1);
-      }
+      private String inRoomBreakfastService;
+      private String laundry; 
+      private String dailyHouseKeeping;
+      private String privateSwimming; 
+      private String luxuryBathub;
 
       @Override
-      public void retrieveDataFromDB(int roomNumber) {
-            DatabaseConnector databaseConnector = new DatabaseConnector();
-            Connection connection = null;
-            PreparedStatement statement = null;
-            ResultSet resultSet = null;
-        
-            try {
-                  connection = databaseConnector.getConnection(); // Get the database connection
-                  String sql = "SELECT * FROM deluxeroom where roomNumber = " + roomNumber ; 
-                  statement = connection.prepareStatement(sql); 
-                  resultSet = statement.executeQuery();
-                  if (resultSet.next()){
-                        setId(resultSet.getInt("id"));
-                        setRoomTypeId(resultSet.getInt("roomtype_id"));
-                        setRoomNumber(resultSet.getInt("roomNumber"));
-                        setAvailability(resultSet.getBoolean("availability"));
-                        setFreeSnack(resultSet.getBoolean("freeSnack"));
-                        setWifi(resultSet.getBoolean("wifi"));
-                        setTelevision(resultSet.getBoolean("television"));
-                        setFitnessCenter(resultSet.getBoolean("fitnessCenter"));
-                        setMinibar(resultSet.getBoolean("minibar"));
-                        this.inRoomBreakfastService = resultSet.getBoolean("inRoomBreakfastService");
-                        this.laundry = resultSet.getBoolean("laundry"); 
-                        this.dailyHouseKeeping = resultSet.getBoolean("dailyHouseKeeping"); 
-                        this.privateSwimming = resultSet.getBoolean("privateSwimming"); 
-                        this.luxuryBathub = resultSet.getBoolean("luxuryBathub");
-                  }
-                  
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                // Close the database resources
-                databaseConnector.closeResources(resultSet, statement, connection);
-            }
-        }
-
-
-        @Override
-        public void display(){
-            System.out.println("Room Name : " + getRoomName());
-            System.out.println("Bed Type : " + getBedType());
-            System.out.println("Price : " + getPrice());
-
-            System.out.println(getRoomName() + " Room Id : " + getId());
-            System.out.println("Room Type : " + getRoomTypeId());
-            System.out.println("Room Number : " + getRoomNumber());
-            System.out.println("Room Availability : " +isAvailability());
-            System.out.println("Snack : " + isFreeSnack());
-            System.out.println("Wifi : " + isWifi());
-
-            System.out.println("Telivision : " + isTelevision());
-            System.out.println("Fitness Center : " + isFitnessCenter());
-            System.out.println("Minibar : " + isMinibar());
-
-            System.out.println("In Room Breakfast Service : " + isInRoomBreakfastService());
-            System.out.println("Laundry : " + isLaundry());
-            System.out.println("Daily House Keeping Service : " + isDailyHouseKeeping());
-            System.out.println("Private Swimming : " + isPrivateSwimming());
-            System.out.println("Luxry Bathub : " + isLuxuryBathub());
+      public String getDescription() {
+      return "RoomDeluxe [\n"
+            + "id=" + id + ",\n"
+            + "roomNumber=" + roomNumber + ",\n"
+            + "availability=" + availability + ",\n"
+            + "freeSnack=" + freeSnack + ",\n"
+            + "wifi=" + wifi + ",\n"
+            + "television=" + television + ",\n"
+            + "fitnessCenter=" + fitnessCenter + ",\n"
+            + "minibar=" + minibar + ",\n"
+            + "inRoomBreakfastService=" + inRoomBreakfastService + ",\n"
+            + "laundry=" + laundry + ",\n"
+            + "dailyHouseKeeping=" + dailyHouseKeeping + ",\n"
+            + "privateSwimming=" + privateSwimming + ",\n"
+            + "luxuryBathub=" + luxuryBathub + "\n"
+            + "]";
       }
 
+      public int getRoomNumber() {
+            return roomNumber;
+      }
 
-      public boolean isInRoomBreakfastService() {
+      public void setRoomNumber(int roomNumber) {
+            this.roomNumber = roomNumber;
+      }
+
+      public String getAvailability() {
+            return availability;
+      }
+
+      public void setAvailability(String availability) {
+            this.availability = availability;
+      }
+
+      public String getFreeSnack() {
+            return freeSnack;
+      }
+
+      public void setFreeSnack(String freeSnack) {
+            this.freeSnack = freeSnack;
+      }
+
+      public String getWifi() {
+            return wifi;
+      }
+
+      public void setWifi(String wifi) {
+            this.wifi = wifi;
+      }
+
+      public String getTelevision() {
+            return television;
+      }
+
+      public void setTelevision(String television) {
+            this.television = television;
+      }
+
+      public String getFitnessCenter() {
+            return fitnessCenter;
+      }
+
+      public void setFitnessCenter(String fitnessCenter) {
+            this.fitnessCenter = fitnessCenter;
+      }
+
+      public String getMinibar() {
+            return minibar;
+      }
+
+      public void setMinibar(String minibar) {
+            this.minibar = minibar;
+      }
+
+      public String getInRoomBreakfastService() {
             return inRoomBreakfastService;
       }
 
-
-      public void setInRoomBreakfastService(boolean inRoomBreakfastService) {
+      public void setInRoomBreakfastService(String inRoomBreakfastService) {
             this.inRoomBreakfastService = inRoomBreakfastService;
       }
 
-
-      public boolean isLaundry() {
+      public String getLaundry() {
             return laundry;
       }
 
-
-      public void setLaundry(boolean laundry) {
+      public void setLaundry(String laundry) {
             this.laundry = laundry;
       }
 
-
-      public boolean isDailyHouseKeeping() {
+      public String getDailyHouseKeeping() {
             return dailyHouseKeeping;
       }
 
-
-      public void setDailyHouseKeeping(boolean dailyHouseKeeping) {
+      public void setDailyHouseKeeping(String dailyHouseKeeping) {
             this.dailyHouseKeeping = dailyHouseKeeping;
       }
 
-
-      public boolean isPrivateSwimming() {
+      public String getPrivateSwimming() {
             return privateSwimming;
       }
 
-
-      public void setPrivateSwimming(boolean privateSwimming) {
+      public void setPrivateSwimming(String privateSwimming) {
             this.privateSwimming = privateSwimming;
       }
 
-
-      public boolean isLuxuryBathub() {
+      public String getLuxuryBathub() {
             return luxuryBathub;
       }
 
-
-      public void setLuxuryBathub(boolean luxuryBathub) {
+      public void setLuxuryBathub(String luxuryBathub) {
             this.luxuryBathub = luxuryBathub;
       }
+
+      public RoomDeluxe(int roomTypeId, String roomName, String bedType, Double price, int id, int roomNumber,
+                  String availability, String freeSnack, String wifi, String television, String fitnessCenter,
+                  String minibar, String inRoomBreakfastService, String laundry, String dailyHouseKeeping,
+                  String privateSwimming, String luxuryBathub) {
+                        
+            super(roomTypeId, roomName, bedType, price);
+            this.id = id;
+            this.roomNumber = roomNumber;
+            this.availability = availability;
+            this.freeSnack = freeSnack;
+            this.wifi = wifi;
+            this.television = television;
+            this.fitnessCenter = fitnessCenter;
+            this.minibar = minibar;
+            this.inRoomBreakfastService = inRoomBreakfastService;
+            this.laundry = laundry;
+            this.dailyHouseKeeping = dailyHouseKeeping;
+            this.privateSwimming = privateSwimming;
+            this.luxuryBathub = luxuryBathub;
+      }
+      
+
 
 }
