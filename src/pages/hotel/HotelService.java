@@ -1,8 +1,12 @@
 package pages.hotel;
 
-public interface HotelInterface {
+import java.util.List;
 
-      public void showRoom();
-      public boolean roomAvailability(int roomtype, int roomNumber); 
-      
+public interface HotelService {
+
+      public List<Room> showRoomType();
+      public List<Room> getRoomAvailable(int roomType); 
+      public Room getSpecificRoomType(int roomType);
+      public Room roomDetails(int roomType, int roomNO);
+ 
 }

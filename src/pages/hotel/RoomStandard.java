@@ -14,13 +14,11 @@ public class RoomStandard extends Room{
 
       @Override
       public String getDescription() {
-      return "RoomStandard [\n"
-            + "id=" + id + ",\n"
-            + "roomNumber=" + roomNumber + ",\n"
-            + "availability=" + availability + ",\n"
-            + "freeSnack=" + freeSnack + ",\n"
-            + "wifi=" + wifi + "\n"
-            + "]";
+      return 
+             "roomNumber       : " + roomNumber + ",\n"
+            + "availability           : " + availability + ",\n"
+            + "freeSnack           : " + freeSnack + ",\n"
+            + "wifi                      : " + wifi + "\n";
       }
 
 

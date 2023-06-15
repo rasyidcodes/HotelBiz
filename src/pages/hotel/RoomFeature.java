@@ -2,6 +2,7 @@ package pages.hotel;
 
 import java.awt.Color;
 import java.awt.Dimension;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -33,14 +34,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class RoomFeature extends JFrame{
-      JFrame frame = new JFrame("ROOM ID 1");
-      int roomType;
-    //   0 standard. 1 premium. 2 deluxe. 
+
+    //   1 standard. 2 premium. 3 deluxe. 
       
-
-
       // show room card 
       public void showRoomCard(){
+            JFrame frame = new JFrame("ROOM");
 
             // get data from interface 
             HotelProvider hotelDAO = new HotelProvider(); 
@@ -48,20 +47,18 @@ public class RoomFeature extends JFrame{
 
             JPanel panelA = new JPanel();
             panelA.setBackground(Color.BLACK);
-            panelA.setPreferredSize(new Dimension(400, 200));
+            panelA.setPreferredSize(new Dimension(520, 200));
             panelA.setLayout(new BoxLayout(panelA, BoxLayout.X_AXIS));
     
             JPanel panelB = new JPanel();
             panelB.setBackground(Color.WHITE);
-            panelB.setPreferredSize(new Dimension(400, 200));
+            panelB.setPreferredSize(new Dimension(520, 200));
             panelB.setLayout(new BoxLayout(panelB, BoxLayout.X_AXIS));
     
             JPanel panelC = new JPanel();
             panelC.setBackground(Color.BLUE);
-            panelC.setPreferredSize(new Dimension(400, 160));
+            panelC.setPreferredSize(new Dimension(520, 160));
             panelC.setLayout(new BoxLayout(panelC, BoxLayout.X_AXIS));
-
-
 
             // SUBPANEL A
             JPanel subpanelA1 = new JPanel(){
@@ -70,7 +67,7 @@ public class RoomFeature extends JFrame{
                     super.paintComponent(g);
                     try {
                         // Baca file gambar
-                        File imageFile = new File("src/pages/image/KAMAR1.jpg");
+                        File imageFile = new File("src/pages/image/KAMAR2.jpg");
                         Image image = ImageIO.read(imageFile);
 
                         // Gambar gambar ke panel1
@@ -80,7 +77,7 @@ public class RoomFeature extends JFrame{
                     }
                 }
             };
-            subpanelA1.setPreferredSize(new Dimension(150, 90));
+            subpanelA1.setPreferredSize(new Dimension(250, 90));
             panelA.add(subpanelA1);
 
             JPanel subpanelA2 = new JPanel(); 
@@ -122,11 +119,11 @@ public class RoomFeature extends JFrame{
             JButton buttonRoomA = new JButton("See Room Availability");
             buttonRoomA.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    roomType = 2;
+                    roomDetailsBook(3);
+                    // frame.dispose();
                 }
             });
             subpanelA2.add(buttonRoomA);
-
 
 
             // SUBPANEL B (PREMIUM ROOM)
@@ -146,7 +143,7 @@ public class RoomFeature extends JFrame{
                       }
                   }
               };
-              subpanelB1.setPreferredSize(new Dimension(150, 90));
+              subpanelB1.setPreferredSize(new Dimension(250, 90));
               panelB.add(subpanelB1);
 
               JPanel subpanelB2 = new JPanel();
@@ -187,7 +184,7 @@ public class RoomFeature extends JFrame{
               JButton buttonRoomB = new JButton("See Room Availability"); 
               buttonRoomB.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    roomType = 1;
+                    roomDetailsBook(2);
                 }
               });              
               subpanelB2.add(buttonRoomB);
@@ -200,7 +197,7 @@ public class RoomFeature extends JFrame{
                       super.paintComponent(g);
                       try {
                           // Baca file gambar
-                          File imageFile = new File("src/pages/image/KAMAR1.jpg");
+                          File imageFile = new File("src/pages/image/KAMAR3.jpg");
                           Image image = ImageIO.read(imageFile);
   
                           // Gambar gambar ke panel1
@@ -210,7 +207,7 @@ public class RoomFeature extends JFrame{
                       }
                   }
               };
-              subpanelC1.setPreferredSize(new Dimension(150, 90));
+              subpanelC1.setPreferredSize(new Dimension(250, 90));
               panelC.add(subpanelC1);
               
               JPanel subpanelC2 = new JPanel();
@@ -243,15 +240,16 @@ public class RoomFeature extends JFrame{
               info3_2.setFont(new Font("Poppins", Font.PLAIN, 10));
 
               JButton buttonRoomC = new JButton("See Room Availability"); 
-              buttonRoomA.addActionListener(new ActionListener() {
+              buttonRoomC.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    roomType = 0;
+                    roomDetailsBook(1);
                 }
               });
               subpanelC2.add(buttonRoomC);
                             
 
             //  ------------------------------------------------------------
+
             JPanel mainPanel = new JPanel();
             mainPanel.setLayout(new GridBagLayout());
             mainPanel.setBackground(new Color(230, 230, 255));
@@ -260,15 +258,15 @@ public class RoomFeature extends JFrame{
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.fill = GridBagConstraints.VERTICAL;
-            gbc.insets = new Insets(30, 50, 10, 50); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
+            gbc.insets = new Insets(30, 100, 10, 100); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
             mainPanel.add(panelA, gbc);
     
             gbc.gridy = 1;
-            gbc.insets = new Insets(10, 50, 10, 50); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
+            gbc.insets = new Insets(10, 100, 10, 100); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
             mainPanel.add(panelB, gbc);
     
             gbc.gridy = 2;
-            gbc.insets = new Insets(10, 50, 30, 50); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
+            gbc.insets = new Insets(10, 100, 30, 100); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
             mainPanel.add(panelC, gbc);
 
             frame.add(mainPanel);
@@ -282,81 +280,60 @@ public class RoomFeature extends JFrame{
 
 
       // room details & book panel 
+      private void roomDetailsBook(int roomType){
 
-      public void roomDetailsBook(){
+            HotelProvider hotelDAO = new HotelProvider(); 
+
+            JFrame frame = new JFrame("ROOM ID 1");
+            frame.setUndecorated(true);
+
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-            // judul atau nama room
+
+            //  ------------------------------------------------------------
+            // PANEL A
+            // JUDUL NAMA ROOM
             JPanel panelA = new JPanel();
             panelA.setBackground(new Color(155, 89, 182));
             panelA.setPreferredSize(new Dimension(900, 50));
-            JLabel labelRoomTypeid_1 = new JLabel("Deluxe Room"); 
-            labelRoomTypeid_1.setForeground(Color.WHITE); // Mengatur warna teks 
-            labelRoomTypeid_1.setFont(new Font("Arial", Font.BOLD, 18));
-            panelA.add(labelRoomTypeid_1);
-            // JButton back = new JButton("BACK");
-            // panelA.add(back);
-            
-            // panel B dibagi jad 2 : untuk tabel avail dan tabel info/ 
+            JButton buttonback = new JButton("BACK");
+            buttonback.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    frame.setVisible(false);
+                }
+              }); 
+
+            panelA.add(buttonback);
+
+            JLabel labelRoomType = new JLabel(hotelDAO.getSpecificRoomType(roomType).getRoomName()); 
+            labelRoomType.setForeground(Color.WHITE); // Mengatur warna teks 
+            labelRoomType.setFont(new Font("Arial", Font.BOLD, 26));
+            panelA.add(labelRoomType);
+
+
+            //  ------------------------------------------------------------
+            // PANEL B
+            // panel B dibagi jad 2 : untuk tabel avail dan tabel info
             // YAITU PANEL B1 DAN B2
             JPanel panelB = new JPanel();
             panelB.setBackground(Color.WHITE);
-            panelB.setPreferredSize(new Dimension(900,500));
+            panelB.setPreferredSize(new Dimension(900,530));
             panelB.setLayout(new GridLayout(1, 2));
 
             JPanel panelB1 = new JPanel();
             JPanel panelB2 = new JPanel(); 
-            // panelB2.setLayout(new GridLayout(3, 1));
             panelB2.setBackground(Color.white);
 
             panelB.add(panelB1);
             panelB.add(panelB2);
-           
 
-
-            // PANEL B2 (dibagi jadi 3 panel)
-            // textinput field room no berapa 
-            JPanel panelB2A = new JPanel(); 
-            panelB2A.setPreferredSize(new Dimension(450,70));
-            panelB2A.setBackground(Color.red);
-            panelB2.add(panelB2A);
-
-
-
-            JPanel panelB2C = new JPanel();
-            panelB2C.setPreferredSize(new Dimension(450,100));
-            panelB2C.setBackground(Color.red);
-            panelB2.add(panelB2C);
-            
-
-            // panel B2A
-            JTextField roomNo = new JTextField(5); // Menentukan panjang teks input (jumlah kolom)
-            panelB2A.add(roomNo);
-
-            JButton buttonCheckRoomDetails = new JButton("Room Details");
-            panelB2A.add(buttonCheckRoomDetails); 
-
-            // panel B2B
-            JPanel panelB2B = new JPanel();
-            panelB2B.setPreferredSize(new Dimension(450,310));
-            panelB2B.setBackground(Color.BLUE);
-            panelB2.add(panelB2B);
-
-            JLabel roomNumber = new JLabel(); 
-            roomNumber.setText("Room number : " + roomNo.getText() + "details");
-            panelB2B.add(roomNumber);
-
-            HotelProvider a = new HotelProvider();
-            // objectRoom = a.getDetails(roomNo.getText());
-            JTextArea area = new JTextArea();
-            area.setPreferredSize(new Dimension(450, 250));
-            panelB2B.add(area);
-            area.setText("***********************************************\n");
-            area.setText(area.getText()+"NAME     :    "+"Rasyid"+"\n\n");
-
-
-            // PANEL B1
-            DefaultTableModel tableModel = new DefaultTableModel();
+            // PANEL B1 (TABEL AVAIL)
+            DefaultTableModel tableModel = new DefaultTableModel() {
+            @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false; // Mencegah sel pada tabel agar tidak dapat diubah
+                }
+            };
             tableModel.addColumn("Room Number");
             tableModel.addColumn("Status");
 
@@ -374,7 +351,7 @@ public class RoomFeature extends JFrame{
             JScrollPane scrollPane = new JScrollPane(Jtabel);
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             // scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-            scrollPane.setPreferredSize(new Dimension(500, 500));
+            scrollPane.setPreferredSize(new Dimension(450, 530));
             panelB1.add(scrollPane);
 
             Jtabel.setRowHeight(30); // Tinggi baris
@@ -385,13 +362,130 @@ public class RoomFeature extends JFrame{
             scrollPane.setBorder(BorderFactory.createLineBorder(Color.GRAY, 0)); // Tambahkan garis tepi
             scrollPane.getViewport().setBackground(Color.WHITE); // Warna latar belakang viewport
 
+            // get data from interface 
+            List<Room> rooms = hotelDAO.getRoomAvailable(roomType); 
+
+            switch (roomType) {
+                case 3:
+                     for(Room objroom : rooms){
+                        tableModel.addRow(new Object[]{
+                            ((RoomDeluxe) objroom).getRoomNumber(), 
+                            ((RoomDeluxe) objroom).getAvailability() 
+                        });
+                     }
+                    break;
+                case 2:
+                     for(Room objroom : rooms){
+                        tableModel.addRow(new Object[]{
+                            ((RoomPremium) objroom).getRoomNumber(), 
+                            ((RoomPremium) objroom).getAvailability()
+                        });
+                     }
+                    break;
+                case 1:
+                     for(Room objroom : rooms){
+                        tableModel.addRow(new Object[]{
+                            ((RoomStandard) objroom).getRoomNumber(), 
+                            ((RoomStandard) objroom).getAvailability() 
+                        });
+                     }
+                    break;
+            }
+
+           
+            // PANEL B2 (dibagi jadi 4 panel) B2A B2B B2C B2D
+            JPanel panelB2B = new JPanel();
+            panelB2B.setPreferredSize(new Dimension(450,310));
+            panelB2B.setBackground(new Color(230, 230, 255));
+
+            // panel B2B (ROOM DESCRIPTION)
+            JLabel roomNumber = new JLabel("ROOM DETAILS : "); 
+            panelB2B.add(roomNumber);
+
+            JTextArea area = new JTextArea();
+            area.setPreferredSize(new Dimension(350, 250));
+            area.setEditable(false);
+            panelB2B.add(area);
+            // area.setText("***********************************************\n");
+
+            // panel B2A (INPUT FIELD KAMAR NOMOR BERAPA)
+            JPanel panelB2A = new JPanel(); 
+            panelB2A.setPreferredSize(new Dimension(450,40));
+            panelB2A.setBackground(new Color(128, 0, 128));
+            
+
+            JTextField roomNo = new JTextField(5); // Menentukan panjang teks input (jumlah kolom)
+            panelB2A.add(roomNo);
+
+            JButton buttonCheckRoomDetails = new JButton("Show Room Details");
+            panelB2A.add(buttonCheckRoomDetails); 
+
+            buttonCheckRoomDetails.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    roomNumber.setText("ROOM DETAILS: " + roomNo.getText());
+                    area.setText("");
+                    int roomNumber = Integer.parseInt(roomNo.getText());
+
+                    try {
+                        Room obj = hotelDAO.roomDetails(roomType, roomNumber);
+                        area.append(obj.getDescription());
+                    } catch (Exception ee) {
+                        JOptionPane.showMessageDialog(null, "Please insert the right room number.", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                    }
+
+                }
+            });
 
 
+            // PANEL B2C (CHECK CHARGES PERDAY)
+            JPanel panelB2C = new JPanel();
+            panelB2C.setPreferredSize(new Dimension(450,100));
+            panelB2C.setBackground(Color.WHITE);
+            panelB2C.setLayout(new GridLayout(2, 3));
+            panelB2C.setBorder(new EmptyBorder(5,15,5,15));
+
+            JLabel day = new JLabel("Days : ");
+            JTextField days = new JTextField();
+            JButton calculateButton = new JButton("Calculate");
+            JLabel charges = new JLabel("Total Charges : "); 
+            JLabel totalcharges = new JLabel(); 
+
+            calculateButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e){
+                    int dayInput = Integer.parseInt(days.getText());
+                    double calculatedCharges = dayInput * hotelDAO.getSpecificRoomType(roomType).getPrice();
+                    totalcharges.setText("" + calculatedCharges);
+                }
+            });
+
+            panelB2C.add(day); 
+            panelB2C.add(days); 
+            panelB2C.add(calculateButton);
+            panelB2C.add(charges); 
+            panelB2C.add(totalcharges); 
+
+
+            // PANEL B2D
+            // bookingbutton 
+            JPanel panelB2D = new JPanel();
+            panelB2D.setPreferredSize(new Dimension(450,310));
+            panelB2D.setBackground(Color.WHITE);
+            JButton bookroomButton = new JButton("BOOK ROOM");
+            panelB2D.add(bookroomButton);
+            
+
+            // Panel B add
+            panelB2.add(panelB2A);
+            panelB2.add(panelB2B);
+            panelB2.add(panelB2C);
+            panelB2.add(panelB2D);
+
+            //  ------------------------------------------------------------
             
             JPanel mainPanel = new JPanel();
             mainPanel.setLayout(new GridBagLayout());
             mainPanel.setBackground(new Color(230, 230, 255));
-
+            mainPanel.setPreferredSize(new Dimension(1000, 694));
 
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
@@ -401,43 +495,36 @@ public class RoomFeature extends JFrame{
             mainPanel.add(panelA, gbc);
 
             gbc.gridy = 1;
-            gbc.insets = new Insets(0, 50, 50, 50); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
+            gbc.insets = new Insets(0, 50, 30, 50); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
             mainPanel.add(panelB, gbc);
-
-
-            // gbc.anchor = GridBagConstraints.VERTICAL;
-            // gbc.insets = new Insets(100, 0, 0, 0);
-            
-            // panelB2.add(panelB2A, gbc);
-            
-            // gbc.gridy = 1;
-            // panelB2.add(panelB2B, gbc);
-            
-            // gbc.gridy = 2;
-            // panelB2.add(panelB2C, gbc);
 
             frame.add(mainPanel);
             frame.pack();
             frame.setVisible(true);
             frame.setLocationRelativeTo(null);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            
       }
+
+
 
       public static void main(String[] args) {
             RoomFeature a = new RoomFeature();
-            // a.roomDetailsBook();
-            // a.showRoomCard();
+            // a.roomDetailsBook(2);
+            a.showRoomCard();
 
-            HotelProvider b = new HotelProvider(); 
-            // RoomDeluxe aby = (RoomDeluxe) b.roomDetails(2, 310);
-            // System.out.println(aby.getDescription());
+            // HotelProvider b = new HotelProvider(); 
+            // // RoomDeluxe aby = (RoomDeluxe) b.roomDetails(2, 310);
+            // // System.out.println(aby.getDescription());
 
-            RoomStandard ac = (RoomStandard) b.roomDetails(0, 101);
-            System.out.println(ac.getDescription());
+            // RoomStandard ac = (RoomStandard) b.roomDetails(0, 101);
+            // System.out.println(ac.getDescription());
 
-            RoomPremium ab = (RoomPremium) b.roomDetails(1,201); 
-            System.out.println(ab.getDescription());
+            // RoomPremium ab = (RoomPremium) b.roomDetails(1,201); 
+            // System.out.println(ab.getDescription());
+
+            // System.out.println(ab.hitungHarga(4));
+
+            // System.out.println(a.roomType);
 
 
 

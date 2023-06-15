@@ -23,21 +23,19 @@ public class RoomDeluxe extends Room {
 
       @Override
       public String getDescription() {
-      return "RoomDeluxe [\n"
-            + "id=" + id + ",\n"
-            + "roomNumber=" + roomNumber + ",\n"
-            + "availability=" + availability + ",\n"
-            + "freeSnack=" + freeSnack + ",\n"
-            + "wifi=" + wifi + ",\n"
-            + "television=" + television + ",\n"
-            + "fitnessCenter=" + fitnessCenter + ",\n"
-            + "minibar=" + minibar + ",\n"
-            + "inRoomBreakfastService=" + inRoomBreakfastService + ",\n"
-            + "laundry=" + laundry + ",\n"
-            + "dailyHouseKeeping=" + dailyHouseKeeping + ",\n"
-            + "privateSwimming=" + privateSwimming + ",\n"
-            + "luxuryBathub=" + luxuryBathub + "\n"
-            + "]";
+      return
+            "roomNumber                        : " + roomNumber + ",\n"
+            + "availability                             : " + availability + ",\n"
+            + "freeSnack                             : " + freeSnack + ",\n"
+            + "wifi                                        : " + wifi + ",\n"
+            + "television                               : " + television + ",\n"
+            + "fitnessCenter                         : " + fitnessCenter + ",\n"
+            + "minibar                                  : " + minibar + ",\n"
+            + "inRoomBreakfastService      : " + inRoomBreakfastService + ",\n"
+            + "laundry                                  : " + laundry + ",\n"
+            + "dailyHouseKeeping              : " + dailyHouseKeeping + ",\n"
+            + "privateSwimming                   : " + privateSwimming + ",\n"
+            + "luxuryBathub                        : " + luxuryBathub + "\n";
       }
 
       public int getRoomNumber() {
