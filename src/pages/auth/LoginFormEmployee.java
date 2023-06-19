@@ -1,6 +1,7 @@
 package pages.auth;
 
 import config.DatabaseConnector;
+import pages.admin.AdminMainPage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,8 +57,13 @@ public class LoginFormEmployee {
                         role = "admin";
                     }
                     
-                    JOptionPane.showMessageDialog(loginFrame, "Login successful!\nWelcome, " + role,
+                    JOptionPane.showMessageDialog(loginFrame, "Login successful!\nWelcome, " + user.getFullName(),
                             "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                    loginFrame.dispose();
+                    AdminMainPage adminMainPage = new AdminMainPage();
+                    adminMainPage.showLoginForm();
+
                 } else {
                     // Authentication failed
                     JOptionPane.showMessageDialog(loginFrame, "Invalid username or password!", "Error",

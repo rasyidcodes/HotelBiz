@@ -1,9 +1,9 @@
 package pages.admin.addMenu;
 
 import config.DatabaseConnector;
-import pages.admin.AdminMainPage;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -25,6 +26,9 @@ import java.sql.Statement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 
 public class Menu extends JFrame {
 
@@ -64,45 +68,40 @@ public class Menu extends JFrame {
         });
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(0, 0, 972, 611);
-
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        contentPane.setBackground(new Color(155, 89, 182));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
         JLabel lblDishName = new JLabel("NAMA MENU");
-        lblDishName.setForeground(Color.white);
-//        lblDishName.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        lblDishName.setFont(new Font("High Tower Text", Font.BOLD, 20));
         lblDishName.setBounds(33, 211, 155, 22);
         contentPane.add(lblDishName);
 
         JLabel lblD = new JLabel("HARGA MENU");
-        lblD.setForeground(Color.white);
-//        lblD.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        lblD.setFont(new Font("High Tower Text", Font.BOLD, 20));
         lblD.setBounds(33, 284, 155, 27);
         contentPane.add(lblD);
 
         JLabel lblDishType = new JLabel("TIPE MENU");
-//        lblDishType.setFont(new Font("High Tower Text", Font.BOLD, 20));
-        lblDishType.setForeground(Color.white);
+        lblDishType.setFont(new Font("High Tower Text", Font.BOLD, 20));
         lblDishType.setBounds(33, 353, 155, 27);
         contentPane.add(lblDishType);
 
         d1 = new JTextField();
-//        d1.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        d1.setFont(new Font("High Tower Text", Font.BOLD, 20));
         d1.setBounds(182, 207, 232, 30);
         contentPane.add(d1);
         d1.setColumns(10);
 
         d2 = new JTextField();
-//        d2.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        d2.setFont(new Font("High Tower Text", Font.BOLD, 20));
         d2.setBounds(182, 282, 232, 30);
         contentPane.add(d2);
         d2.setColumns(10);
 
         d3 = new JTextField();
-//        d3.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        d3.setFont(new Font("High Tower Text", Font.BOLD, 20));
         d3.setBounds(182, 351, 232, 30);
         contentPane.add(d3);
         d3.setColumns(10);
@@ -116,7 +115,6 @@ public class Menu extends JFrame {
 
         JLabel lblNewLabel = new JLabel("Hotelbiz");
         lblNewLabel.setHorizontalAlignment(0);
-        lblNewLabel.setForeground(Color.white);
         lblNewLabel.setFont(new Font("High Tower Text", 1, 37));
         lblNewLabel.setBounds(0, 0, 947, 142);
         this.contentPane.add(lblNewLabel);
@@ -130,7 +128,7 @@ public class Menu extends JFrame {
 
             }
         });
-//        btnAddDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        btnAddDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
         btnAddDish.setBounds(45, 486, 176, 53);
         contentPane.add(btnAddDish);
 
@@ -141,7 +139,7 @@ public class Menu extends JFrame {
                 deleteDishes();
             }
         });
-//        btnDeleteDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        btnDeleteDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
         btnDeleteDish.setBounds(245, 486, 221, 53);
         contentPane.add(btnDeleteDish);
 
@@ -152,7 +150,7 @@ public class Menu extends JFrame {
                 updateDishes();
             }
         });
-//        btnUpdateDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        btnUpdateDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
         btnUpdateDish.setBounds(502, 486, 221, 53);
         contentPane.add(btnUpdateDish);
 
@@ -162,11 +160,9 @@ public class Menu extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 setVisible(false);
-                AdminMainPage adminMainPage = new AdminMainPage();
-                adminMainPage.showLoginForm();
             }
         });
-//        btnBack.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        btnBack.setFont(new Font("High Tower Text", Font.BOLD, 20));
         btnBack.setBounds(765, 486, 143, 53);
         contentPane.add(btnBack);
 
@@ -198,6 +194,18 @@ public class Menu extends JFrame {
         model.addColumn("NAMA MENU");
         model.addColumn("TIPE MENU");
         model.addColumn("HARGA");
+
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    d1.setText(table.getValueAt(selectedRow, 1).toString());  // Mengisi kolom "Nama Menu"
+                    d2.setText(table.getValueAt(selectedRow, 3).toString());  // Mengisi kolom "Harga Menu"
+                    d3.setText(table.getValueAt(selectedRow, 2).toString());  // Mengisi kolom "Tipe Menu"
+                }
+            }
+        });
 
         try {
             String query = "SELECT * FROM restaurant";
