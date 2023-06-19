@@ -3,8 +3,7 @@ package pages.admin.addMenu;
 
 import config.DatabaseConnector;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -71,6 +69,7 @@ public class Menu extends JFrame {
         setBounds(0, 0, 972, 611);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBackground(new Color(155, 89, 182));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 

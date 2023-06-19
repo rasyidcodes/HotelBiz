@@ -155,7 +155,7 @@ public class AddRoom extends JFrame {
         roomavailcombo.setBounds(700, 300, 147, 30);
         contentPane.add(roomavailcombo);
 
-        JButton btnupdateavail = new JButton("udpate");
+        JButton btnupdateavail = new JButton("update");
 //        btnupdateavail.setFont(new Font("High Tower Text", Font.BOLD, 15));
         btnupdateavail.setBounds(500, 350, 150, 30);
         contentPane.add(btnupdateavail);
