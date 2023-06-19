@@ -1,6 +1,7 @@
 package pages.guest.bookRoom;
 
 import pages.auth.Guest;
+import pages.guest.GuestMainPage;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -264,6 +265,8 @@ public class RoomFeature extends JFrame{
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
+                GuestMainPage guestMainPage = new GuestMainPage();
+                guestMainPage.showLoginForm();
             }
         });
 
