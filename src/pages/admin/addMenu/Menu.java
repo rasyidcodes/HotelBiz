@@ -1,5 +1,6 @@
 package pages.admin.addMenu;
 
+
 import config.DatabaseConnector;
 
 import java.awt.BorderLayout;
@@ -74,17 +75,17 @@ public class Menu extends JFrame {
         contentPane.setLayout(null);
 
         JLabel lblDishName = new JLabel("NAMA MENU");
-        lblDishName.setFont(new Font("High Tower Text", Font.BOLD, 20));
+//        lblDishName.setFont(new Font("High Tower Text", Font.BOLD, 20));
         lblDishName.setBounds(33, 211, 155, 22);
         contentPane.add(lblDishName);
 
         JLabel lblD = new JLabel("HARGA MENU");
-        lblD.setFont(new Font("High Tower Text", Font.BOLD, 20));
+//        lblD.setFont(new Font("High Tower Text", Font.BOLD, 20));
         lblD.setBounds(33, 284, 155, 27);
         contentPane.add(lblD);
 
         JLabel lblDishType = new JLabel("TIPE MENU");
-        lblDishType.setFont(new Font("High Tower Text", Font.BOLD, 20));
+//        lblDishType.setFont(new Font("High Tower Text", Font.BOLD, 20));
         lblDishType.setBounds(33, 353, 155, 27);
         contentPane.add(lblDishType);
 
@@ -128,7 +129,7 @@ public class Menu extends JFrame {
 
             }
         });
-        btnAddDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
+//        btnAddDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
         btnAddDish.setBounds(45, 486, 176, 53);
         contentPane.add(btnAddDish);
 
@@ -139,7 +140,7 @@ public class Menu extends JFrame {
                 deleteDishes();
             }
         });
-        btnDeleteDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
+//        btnDeleteDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
         btnDeleteDish.setBounds(245, 486, 221, 53);
         contentPane.add(btnDeleteDish);
 
@@ -150,7 +151,7 @@ public class Menu extends JFrame {
                 updateDishes();
             }
         });
-        btnUpdateDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
+//        btnUpdateDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
         btnUpdateDish.setBounds(502, 486, 221, 53);
         contentPane.add(btnUpdateDish);
 
@@ -162,7 +163,7 @@ public class Menu extends JFrame {
                 setVisible(false);
             }
         });
-        btnBack.setFont(new Font("High Tower Text", Font.BOLD, 20));
+//        btnBack.setFont(new Font("High Tower Text", Font.BOLD, 20));
         btnBack.setBounds(765, 486, 143, 53);
         contentPane.add(btnBack);
 
@@ -261,29 +262,43 @@ public class Menu extends JFrame {
     public void updateDishes() {
         int row = table.getSelectedRow();
         if (row < 0) {
-            JOptionPane.showMessageDialog(null, "Select a menu to update");
+            JOptionPane.showMessageDialog(null, "Pilih menu yang akan diperbarui");
             return;
         }
 
-        DatabaseConnector connect = new DatabaseConnector();
-        Connection conn = connect.getConnection();
+        String itemName = d1.getText();
+        String price = d2.getText();
+        String type = d3.getText();
 
-        try {
-            String query = "UPDATE restaurant SET itemName=?, Type=?, Price=? WHERE itemNo=?";
-            PreparedStatement pst = conn.prepareStatement(query);
-            pst.setString(1, d1.getText());
-            pst.setString(2, d3.getText());
-            pst.setString(3, d2.getText());
-            pst.setString(4, table.getValueAt(row, 0).toString());
-            pst.executeUpdate();
-            pst.close();
-            conn.close();
-            JOptionPane.showMessageDialog(null, "Menu updated successfully");
-            displayDishes();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (itemName.isEmpty() || price.isEmpty() || type.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Isi semua kolom dengan benar");
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin memperbarui menu ini?",
+                "Konfirmasi Pembaruan", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            DatabaseConnector connect = new DatabaseConnector();
+            Connection conn = connect.getConnection();
+            try {
+                String query = "UPDATE restaurant SET itemName=?, Type=?, Price=? WHERE itemNo=?";
+                PreparedStatement pst = conn.prepareStatement(query);
+                pst.setString(1, itemName);
+                pst.setString(2, type);
+                pst.setString(3, price);
+                pst.setString(4, table.getValueAt(row, 0).toString());
+                pst.executeUpdate();
+                pst.close();
+                conn.close();
+                JOptionPane.showMessageDialog(null, "Menu berhasil diperbarui");
+                displayDishes();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
+
+
 
 
     public void deleteDishes() {

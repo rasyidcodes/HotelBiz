@@ -9,7 +9,6 @@ public interface OrderService {
     List<Menu> getAllDrink();
 
     DefaultTableModel fillMeal();
-
     DefaultTableModel fillDrink();
 
     boolean checkoutMenu(String custName, String custAddr, int phone, String meal, String drink, int Price, String description,int status);
