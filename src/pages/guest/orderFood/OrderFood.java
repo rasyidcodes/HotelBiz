@@ -3,6 +3,7 @@ package pages.guest.orderFood;
 import config.DatabaseConnector;
 import config.MyException;
 import pages.auth.Guest;
+import pages.guest.GuestMainPage;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -54,6 +55,9 @@ public class OrderFood extends JFrame{
     Date dt= new Date();
     int flag=0;
 
+
+
+
     /**
      * Launch the application.
      */
@@ -75,16 +79,19 @@ public class OrderFood extends JFrame{
      */
     public OrderFood() {
 
+        new JFrame("Order Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(0, 0, 1367, 772);
+
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBackground(new Color(155, 89, 182));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
-                FillDishes();
+                FillMeals();
                 FillDrinks();
                 a1.setVisible(false);
                 a2.setVisible(false);
@@ -109,19 +116,20 @@ public class OrderFood extends JFrame{
 
         //LABEL SELECT MEAL =========================================================
         JLabel lblSelectDish = new JLabel("SELECT MEAL");
+        lblSelectDish.setForeground(Color.white);
 
-        lblSelectDish.setFont(new Font("High Tower Text", Font.BOLD, 20));
+//        lblSelectDish.setFont(new Font( Font.BOLD, 20));
         lblSelectDish.setBounds(34, 128, 181, 22);
         contentPane.add(lblSelectDish);
 
         //JComboBox comboBox_Dish = new JComboBox();
-        comboBox_Dish.setFont(new Font("High Tower Text", Font.BOLD, 21));
         comboBox_Dish.setBounds(213, 122, 281, 34);
         contentPane.add(comboBox_Dish);
 
         //QTY
         JLabel lblQty = new JLabel("Quantity");
-        lblQty.setFont(new Font("High Tower Text", Font.BOLD, 20));
+//        lblQty.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        lblQty.setForeground(Color.white);
         lblQty.setBounds(34, 178, 181, 22);
         contentPane.add(lblQty);
 
@@ -132,7 +140,8 @@ public class OrderFood extends JFrame{
 
 
         JLabel lblTopping = new JLabel("Topping");
-        lblTopping.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        lblTopping.setForeground(Color.white);
+//        lblTopping.setFont(new Font("High Tower Text", Font.BOLD, 20));
         lblTopping.setBounds(34, 220, 181, 22);
         contentPane.add(lblTopping);
 
@@ -155,18 +164,20 @@ public class OrderFood extends JFrame{
 
         //LABEL SELECT DRINK
         JLabel lblPinaColada = new JLabel("SELECT DRINK");
-        lblPinaColada.setFont(new Font("High Tower Text", Font.BOLD, 21));
+        lblPinaColada.setForeground(Color.white);
+//        lblPinaColada.setFont(new Font("High Tower Text", Font.BOLD, 21));
         lblPinaColada.setBounds(22, 299, 183, 26);
         contentPane.add(lblPinaColada);
 
         //JComboBox comboBox_Drink = new JComboBox();
-        comboBox_Drink.setFont(new Font("High Tower Text", Font.BOLD, 21));
+//        comboBox_Drink.setFont(new Font("High Tower Text", Font.BOLD, 21));
         comboBox_Drink.setBounds(215, 295, 268, 34);
         contentPane.add(comboBox_Drink);
 
 
         JLabel lblQtyDrink = new JLabel("Quantity");
-        lblQtyDrink.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        lblQtyDrink.setForeground(Color.white);
+//        lblQtyDrink.setFont(new Font("High Tower Text", Font.BOLD, 20));
         lblQtyDrink.setBounds(34, 350, 181, 22);
         contentPane.add(lblQtyDrink);
 
@@ -180,7 +191,8 @@ public class OrderFood extends JFrame{
 
         //Choose sugar=======================================================================
         JLabel lblDrinkIce = new JLabel("Choose SUGAR");
-        lblDrinkIce.setFont(new Font("High Tower Text", Font.BOLD, 21));
+        lblDrinkIce.setForeground(Color.white);
+//        lblDrinkIce.setFont(new Font("High Tower Text", Font.BOLD, 21));
         lblDrinkIce.setBounds(22, 400, 183, 26);
         contentPane.add(lblDrinkIce);
 
@@ -214,7 +226,8 @@ public class OrderFood extends JFrame{
 
         //Choose ICE=======================================================================
         JLabel lblChooseIce = new JLabel("Choose ICE");
-        lblChooseIce.setFont(new Font("High Tower Text", Font.BOLD, 21));
+        lblChooseIce.setForeground(Color.white);
+//        lblChooseIce.setFont(new Font("High Tower Text", Font.BOLD, 21));
         lblChooseIce.setBounds(22, 440, 183, 26);
         contentPane.add(lblChooseIce);
 
@@ -247,7 +260,8 @@ public class OrderFood extends JFrame{
 
 
         JLabel lblTotal = new JLabel("COST OF MEAL :");
-        lblTotal.setFont(new Font("High Tower Text", Font.BOLD, 21));
+        lblTotal.setForeground(Color.white);
+//        lblTotal.setFont(new Font("High Tower Text", Font.BOLD, 21));
         lblTotal.setBounds(33, 530, 192, 34);
         contentPane.add(lblTotal);
 
@@ -256,12 +270,13 @@ public class OrderFood extends JFrame{
 //        meal.setBounds(233, 530, 140, 34);
 //        contentPane.add(meal);
 //        meal.setColumns(10);
-        valueMeal.setFont(new Font("High Tower Text", Font.PLAIN, 20));
+//        valueMeal.setFont(new Font("High Tower Text", Font.PLAIN, 20));
         valueMeal.setBounds(233, 530, 140, 34);
         contentPane.add(valueMeal);
 
         JLabel lblCostOfDrinks = new JLabel("COST OF DRINKS : ");
-        lblCostOfDrinks.setFont(new Font("High Tower Text", Font.BOLD, 21));
+        lblCostOfDrinks.setForeground(Color.white);
+//        lblCostOfDrinks.setFont(new Font("High Tower Text", Font.BOLD, 21));
         lblCostOfDrinks.setBounds(22, 590, 207, 26);
         contentPane.add(lblCostOfDrinks);
 
@@ -271,7 +286,7 @@ public class OrderFood extends JFrame{
 //        contentPane.add(drink);
 //        drink.setColumns(10);
 
-        valueDrink.setFont(new Font("High Tower Text", Font.PLAIN, 20));
+//        valueDrink.setFont(new Font("High Tower Text", Font.PLAIN, 20));
         valueDrink.setBounds(233, 590, 140, 34);
         contentPane.add(valueDrink);
 
@@ -304,7 +319,7 @@ public class OrderFood extends JFrame{
                 }
             }
         });
-        btnGenerateReceipt.setFont(new Font("High Tower Text", Font.BOLD, 21));
+//        btnGenerateReceipt.setFont(new Font("High Tower Text", Font.BOLD, 21));
         btnGenerateReceipt.setBounds(600, 673, 281, 39);
         contentPane.add(btnGenerateReceipt);
 
@@ -350,45 +365,12 @@ public class OrderFood extends JFrame{
 //                    System.out.println(drinkPrice);
 
                     valueMeal.setText(String.valueOf(mealPrice));
+                    valueMeal.setForeground(Color.white);
                     valueDrink.setText(String.valueOf(drinkPrice));
+                    valueDrink.setForeground(Color.white);
                     valueTotal.setText(String.valueOf(drinkPrice + mealPrice));
+                    valueTotal.setForeground(Color.white);
 
-
-
-
-
-
-
-
-
-
-
-
-//                    System.out.println(selectedValue);
-//                    System.out.println(selectedDrink.getItemName());
-//                    System.out.println(selectedDish.getItemName());
-
-//                    if(name.getText().equals(""))
-//                    {   a1.setVisible(true);
-//                        throw new MyException("Exception : Please Fill all the details");
-//
-//                    }
-//                    else if(addr.getText().equals(""))
-//                    {   a2.setVisible(true);
-//                        throw new MyException("Exception :Please Fill all the details");
-//
-//                    }
-//                    else if(phone.getText().equals(""))
-//                    {   a3.setVisible(true);
-//                        throw new MyException("Exception :Please Fill all the details");
-//
-//                    }
-//
-//                    else
-//                    {
-//                        calculateAmount();
-//                    }
-//                    calculateAmount();
                 }
 
                 catch(Exception exception)
@@ -397,7 +379,7 @@ public class OrderFood extends JFrame{
                 }
             }
         });
-        btnTotal.setFont(new Font("High Tower Text", Font.BOLD, 21));
+//        btnTotal.setFont(new Font("High Tower Text", Font.BOLD, 21));
         btnTotal.setBounds(330, 480, 154, 39);
         contentPane.add(btnTotal);
 
@@ -425,7 +407,7 @@ public class OrderFood extends JFrame{
 
         table_1 = new JTable();
         scrollPane_1.setViewportView(table_1);
-        area.setFont(new Font("High Tower Text", Font.PLAIN, 18));
+//        area.setFont(new Font("High Tower Text", Font.PLAIN, 18));
 
 
         area.setBounds(909, 190, 447, 470);
@@ -437,32 +419,38 @@ public class OrderFood extends JFrame{
 //        contentPane.add(totalA);
 //        totalA.setColumns(10);
 
-        valueTotal.setFont(new Font("High Tower Text", Font.BOLD, 20));
+//        valueTotal.setFont(new Font("High Tower Text", Font.BOLD, 20));
         valueTotal.setBounds(231, 650, 142, 34);
         contentPane.add(valueTotal);
 
         JLabel lblTotalAmount = new JLabel("TOTAL");
-        lblTotalAmount.setFont(new Font("High Tower Text", Font.BOLD, 20));
+        lblTotalAmount.setForeground(Color.white);
+//        lblTotalAmount.setFont(new Font("High Tower Text", Font.BOLD, 20));
         lblTotalAmount.setBounds(73, 650, 126, 25);
         contentPane.add(lblTotalAmount);
 
         JButton btnBack = new JButton("BACK");
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(flag==0)
-                    JOptionPane.showMessageDialog(null, "First you need to generate receipt");
-                else {
-//                    secondPage sp = new secondPage();
-//                    sp.setVisible(true);
-//                    sp.pack();
-//                    sp.setLocationRelativeTo(null);
-//                    sp.setBounds(100, 100, 1015, 574);
-//                    setVisible(false);
-                }
+                dispose();
+                GuestMainPage guestMainPage =  new GuestMainPage();
+                guestMainPage.showLoginForm();
+
+
+//                if(flag==0)
+//                    JOptionPane.showMessageDialog(null, "First you need to generate receipt");
+//                else {
+////                    secondPage sp = new secondPage();
+////                    sp.setVisible(true);
+////                    sp.pack();
+////                    sp.setLocationRelativeTo(null);
+////                    sp.setBounds(100, 100, 1015, 574);
+////                    setVisible(false);
+//                }
 
             }
         });
-        btnBack.setFont(new Font("High Tower Text", Font.BOLD, 20));
+//        btnBack.setFont(new Font("High Tower Text", Font.BOLD, 20));
         btnBack.setBounds(1200, 673, 148, 39);
         contentPane.add(btnBack);
 
@@ -489,34 +477,6 @@ public class OrderFood extends JFrame{
         contentPane.add(label);
     }
 
-    private void ActionLogic(Menu selectedDish, Menu selectedDrink) {
-//        comboBox_Dish.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                // Retrieve the selected item
-////                Menu selectedDish = (Menu) comboBox_Dish.getSelectedItem();
-//                if (selectedDish != null) {
-//                    int selectedId = selectedDish.getItemNo();
-//                    // Use the selected ID as needed
-//                    System.out.println("Selected ID: " + selectedId);
-//                }
-//            }
-//        });
-//
-////        Drink selectedDish = (Drink) comboBox_Drink.getSelectedItem();
-//        comboBox_Drink.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                // Retrieve the selected item
-//
-//                if (selectedDrink != null) {
-//                    int selectedId = selectedDrink.hitungTotal(12);
-//                    // Use the selected ID as needed
-//                    System.out.println("Selected ID: " + selectedId);
-//                }
-//            }
-//        });
-    }
 
     private void FillCombo()
     {  PreparedStatement ps = null;
@@ -547,21 +507,6 @@ public class OrderFood extends JFrame{
             for (Menu drink : drinks) {
                 comboBox_Drink.addItem(drink);
             }
-
-
-
-//            String sql2 = "SELECT * FROM restaurant where Type='DRINK' ORDER BY itemName ASC";
-//            ps1=conn.prepareStatement(sql2);
-//            result1= ps1.executeQuery();
-//            while(result1.next())
-//            {
-//                String Dname= result1.getString("itemName");
-//                comboBox_Drink.addItem(Dname);
-//
-//            }
-
-
-
         }
         catch(Exception e)
         {
@@ -569,29 +514,18 @@ public class OrderFood extends JFrame{
         }
     }
 
-    public void FillDishes()
+    public void FillMeals()
     {
         DatabaseConnector connect=new DatabaseConnector();
         Connection conn=connect.getConnection();
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("DISH NAME");
-        model.addColumn("PRICE");
+
 
         try {
-            String query = "SELECT * FROM restaurant where Type='MEAL'";
-            Statement st= conn.createStatement();
-            ResultSet rs= st.executeQuery(query);
-            while(rs.next())
-            {
-                model.addRow(new Object[] {
-                        rs.getString("itemName"),
-                        rs.getString("Price"),
 
-                });
-            }
-            rs.close();
-            st.close();
-            conn.close();
+            MenuProvider menuProvider =  new MenuProvider();
+            model =  menuProvider.fillMeal();
+
             table.setModel(model);
             table.setAutoResizeMode(0);
             table.getColumnModel().getColumn(0).setPreferredWidth(250);
@@ -614,20 +548,10 @@ public class OrderFood extends JFrame{
         model2.addColumn("PRICE");
 
         try {
-            String query = "SELECT * FROM restaurant where Type='DRINK'";
-            Statement st= conn.createStatement();
-            ResultSet rs= st.executeQuery(query);
-            while(rs.next())
-            {
-                model2.addRow(new Object[] {
-                        rs.getString("itemName"),
-                        rs.getString("Price"),
 
-                });
-            }
-            rs.close();
-            st.close();
-            conn.close();
+            MenuProvider menuProvider =  new MenuProvider();
+            model2 =  menuProvider.fillDrink();
+
             table_1.setModel(model2);
             table_1.setAutoResizeMode(0);
             table_1.getColumnModel().getColumn(0).setPreferredWidth(250);
@@ -639,24 +563,6 @@ public class OrderFood extends JFrame{
         {
             e.printStackTrace();
         }
-    }
-
-    public void calculateAmount()
-    {
-        DatabaseConnector connect=new DatabaseConnector();
-        Connection conn=connect.getConnection();
-        PreparedStatement ps = null;
-        ResultSet result = null;
-        PreparedStatement ps1 = null;
-        ResultSet result1 = null;
-        String mealAmount=null;
-        String drinkAmount=null;
-        String di=(String)comboBox_Dish.getSelectedItem();
-        String dr=(String)comboBox_Drink.getSelectedItem();
-
-
-
-
     }
 
 

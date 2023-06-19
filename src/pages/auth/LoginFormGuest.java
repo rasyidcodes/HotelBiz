@@ -15,10 +15,25 @@ public class LoginFormGuest {
 
     public LoginFormGuest() {
         loginFrame = new JFrame("Guest Login");
-        JPanel loginPanel = new JPanel(new GridLayout(4, 2, 10, 10));
+        loginFrame.setSize(800, 600);
+        loginFrame.setPreferredSize(new Dimension(800, 600));
+
+        JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBackground(new Color(155, 89, 182));
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 1.0;
+        constraints.weighty = 1.0;
+        constraints.anchor = GridBagConstraints.CENTER;
+
+        JPanel loginPanel = new JPanel(new GridLayout(5, 2, 10, 10));
+        loginPanel.setBackground(new Color(155, 89, 182));
 
         JLabel usernameLabel = new JLabel("Username:");
+        usernameLabel.setForeground(Color.white);
         JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel.setForeground(Color.white);
 
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
@@ -53,7 +68,17 @@ public class LoginFormGuest {
             }
         });
 
-        JButton adminLoginButton = new JButton("Login as Admin");
+        JButton signupGuestButton = new JButton("Signup guest");
+
+        signupGuestButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loginFrame.dispose();
+                SignUpFormGuest signUpFormGuest = new SignUpFormGuest();
+                signUpFormGuest.showSignupGuestForm();
+            }
+        });
+        JButton adminLoginButton = new JButton("employee login");
         adminLoginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,6 +88,8 @@ public class LoginFormGuest {
             }
         });
 
+
+
         loginPanel.add(usernameLabel);
         loginPanel.add(usernameField);
         loginPanel.add(passwordLabel);
@@ -70,10 +97,17 @@ public class LoginFormGuest {
         loginPanel.add(new JLabel()); // Empty label for spacing
         loginPanel.add(loginButton);
 
+
+        loginPanel.add(new JLabel()); // Empty label for spacing
+        loginPanel.add(signupGuestButton);
+
+
         loginPanel.add(new JLabel()); // Empty label for spacing
         loginPanel.add(adminLoginButton);
 
-        loginFrame.add(loginPanel);
+        mainPanel.add(loginPanel, constraints);
+
+        loginFrame.add(mainPanel);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.pack();
     }

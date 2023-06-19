@@ -14,16 +14,31 @@ public class LoginFormEmployee {
     private JPasswordField passwordField;
 
     public LoginFormEmployee() {
-        loginFrame = new JFrame("Employee");
-        JPanel loginPanel = new JPanel(new GridLayout(4, 2, 10, 10));
+        loginFrame = new JFrame("Employee Login");
+        JPanel loginPanel = new JPanel(new GridLayout(5, 2, 10, 10));
+        loginPanel.setBackground(new Color(155, 89, 182));
+        loginFrame.setSize(800, 600);
+        loginFrame.setPreferredSize(new Dimension(800, 600));
+
+        JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBackground(new Color(155, 89, 182));
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 1.0;
+        constraints.weighty = 1.0;
+        constraints.anchor = GridBagConstraints.CENTER;
 
         JLabel usernameLabel = new JLabel("Username:");
+        usernameLabel.setForeground(Color.white);
         JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel.setForeground(Color.white);
 
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
 
-        JButton loginButton = new JButton("Login as Employee");
+        JButton loginButton = new JButton("Login");
+
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -53,7 +68,18 @@ public class LoginFormEmployee {
             }
         });
 
-        JButton guestLoginButton = new JButton("Login as Guest");
+        JButton signUpButton = new JButton("Sign up");
+        signUpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loginFrame.dispose();
+                SignUpfFormEmployee loginFormEmployee = new SignUpfFormEmployee();
+                loginFormEmployee.showSignupEmployeeForm();
+            }
+        });
+
+
+        JButton guestLoginButton = new JButton("Guest Login");
         guestLoginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,10 +95,17 @@ public class LoginFormEmployee {
         loginPanel.add(passwordField);
         loginPanel.add(new JLabel()); // Empty label for spacing
         loginPanel.add(loginButton);
+
+        loginPanel.add(new JLabel()); // Empty label for spacing
+        loginPanel.add(signUpButton);
+
         loginPanel.add(new JLabel()); // Empty label for spacing
         loginPanel.add(guestLoginButton);
 
-        loginFrame.add(loginPanel);
+
+        mainPanel.add(loginPanel, constraints);
+
+        loginFrame.add(mainPanel);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.pack();
     }

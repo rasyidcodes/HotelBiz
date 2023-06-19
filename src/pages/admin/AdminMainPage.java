@@ -1,22 +1,20 @@
-package pages.guest;
+package pages.admin;
 
-import config.DatabaseConnector;
-import pages.auth.*;
-import pages.guest.bookRoom.RoomFeature;
-import pages.guest.orderFood.OrderFood;
+import pages.admin.addMenu.Menu;
+import pages.admin.addRoom.AddRoom;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GuestMainPage {
+public class AdminMainPage {
     private JFrame loginFrame;
     private JTextField usernameField;
     private JPasswordField passwordField;
 
-    public GuestMainPage() {
-        loginFrame = new JFrame("Guest Main Page");
+    public AdminMainPage() {
+        loginFrame = new JFrame("Admin Main Page");
         loginFrame.setSize(800, 600);
         loginFrame.setPreferredSize(new Dimension(800, 600));
 
@@ -29,43 +27,41 @@ public class GuestMainPage {
         constraints.weighty = 1.0;
         constraints.anchor = GridBagConstraints.CENTER;
 
-        JPanel loginPanel = new JPanel(new GridLayout(3, 1, 10, 30));
+        JPanel loginPanel = new JPanel(new GridLayout(4, 1, 10, 30));
         loginPanel.setBackground(new Color(155, 89, 182));
 
 
 
-        JButton orderRoomButton = new JButton("Order Room");
-        JButton orderMenuButton = new JButton("Order Menu");
-        orderMenuButton.addActionListener(new ActionListener() {
+        JButton editRoomButton = new JButton("Edit Room");
+        editRoomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loginFrame.dispose();
-                OrderFood orderFood = new OrderFood();
-                orderFood.setVisible(true);
+                AddRoom addRoom =  new AddRoom();
+                addRoom.setVisible(true);
             }
         });
 
-        orderRoomButton.addActionListener(new ActionListener() {
+        JButton editMenuButton = new JButton("Edit Menu");
+
+        editMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loginFrame.dispose();
-                RoomFeature roomFeature = new RoomFeature();
-                roomFeature.showRoomCard();
+                Menu menu =  new Menu();
+                menu.setVisible(true);
             }
         });
 
 
-
-
-
-        JLabel mainLabel = new JLabel("Guest Menu");
+        JLabel mainLabel = new JLabel("Admin Menu");
         mainLabel.setForeground(Color.white);
         mainLabel.setFont(new Font("High Tower Text", Font.BOLD, 40));
 
 
         loginPanel.add(mainLabel);
-        loginPanel.add(orderRoomButton);
-        loginPanel.add(orderMenuButton); // Empty label for spacing
+        loginPanel.add(editRoomButton);
+        loginPanel.add(editMenuButton); // Empty label for spacing
 
 
         mainPanel.add(loginPanel, constraints);
@@ -83,7 +79,7 @@ public class GuestMainPage {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                GuestMainPage loginFormGuest = new GuestMainPage();
+                AdminMainPage loginFormGuest = new AdminMainPage();
                 loginFormGuest.showLoginForm();
             }
         });

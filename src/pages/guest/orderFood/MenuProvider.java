@@ -4,6 +4,7 @@ import config.DatabaseConnector;
 import pages.auth.Guest;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,13 +54,71 @@ public class MenuProvider implements OrderService {
 
                 Drink drink = new Drink(itemNo, itemName, price, Type);
                 // Set other properties on the dish object as needed
-
                 drinks.add(drink);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return drinks;
+    }
+
+    @Override
+    public DefaultTableModel fillMeal() {
+
+        DatabaseConnector connect = new DatabaseConnector();
+        Connection conn = connect.getConnection();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("MEAL NAME");
+        model.addColumn("PRICE");
+
+        try{
+            String query = "SELECT * FROM restaurant where Type='MEAL'";
+            Statement st= conn.createStatement();
+            ResultSet rs= st.executeQuery(query);
+            while(rs.next())
+            {
+                model.addRow(new Object[] {
+                        rs.getString("itemName"),
+                        rs.getString("Price"),
+                });
+            }
+
+            System.out.println("jml +" + model.getColumnCount());
+            return model;
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public DefaultTableModel fillDrink() {
+        DatabaseConnector connect = new DatabaseConnector();
+        Connection conn = connect.getConnection();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("MEAL NAME");
+        model.addColumn("PRICE");
+
+        try{
+            String query = "SELECT * FROM restaurant where Type='DRINK'";
+            Statement st= conn.createStatement();
+            ResultSet rs= st.executeQuery(query);
+            while(rs.next())
+            {
+                model.addRow(new Object[] {
+                        rs.getString("itemName"),
+                        rs.getString("Price"),
+                });
+            }
+
+            System.out.println("jml +" + model.getColumnCount());
+            return model;
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     @Override
