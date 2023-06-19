@@ -8,5 +8,7 @@ public interface HotelService {
       public List<Room> getRoomAvailable(int roomType); 
       public Room getSpecificRoomType(int roomType);
       public Room roomDetails(int roomType, int roomNO);
+      public boolean updateRoomAvailability(int roomType, int roomNumber, boolean Availability);
+      public boolean placeRoomOrder(int userid, int roomType, int roomNumber, int days);
  
 }

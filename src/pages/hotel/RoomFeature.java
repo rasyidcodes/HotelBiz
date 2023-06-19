@@ -39,11 +39,16 @@ public class RoomFeature extends JFrame{
       
       // show room card 
       public void showRoomCard(){
-            JFrame frame = new JFrame("ROOM");
+            JFrame frame = new JFrame();
 
             // get data from interface 
             HotelProvider hotelDAO = new HotelProvider(); 
             List<Room> roominfo = hotelDAO.showRoomType();
+
+            // // backButton 
+            // JPanel backPanel = new JPanel(); 
+            // backPanel.setPreferredSize(new Dimension(520, 40));
+
 
             JPanel panelA = new JPanel();
             panelA.setBackground(Color.BLACK);
@@ -120,7 +125,7 @@ public class RoomFeature extends JFrame{
             buttonRoomA.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     roomDetailsBook(3);
-                    // frame.dispose();
+                    frame.dispose();
                 }
             });
             subpanelA2.add(buttonRoomA);
@@ -185,6 +190,7 @@ public class RoomFeature extends JFrame{
               buttonRoomB.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     roomDetailsBook(2);
+                    frame.dispose();
                 }
               });              
               subpanelB2.add(buttonRoomB);
@@ -243,6 +249,7 @@ public class RoomFeature extends JFrame{
               buttonRoomC.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     roomDetailsBook(1);
+                    frame.dispose();
                 }
               });
               subpanelC2.add(buttonRoomC);
@@ -254,20 +261,38 @@ public class RoomFeature extends JFrame{
             mainPanel.setLayout(new GridBagLayout());
             mainPanel.setBackground(new Color(230, 230, 255));
 
+            // Create the back button
+            JButton backButton = new JButton("Back");
+            backButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose(); 
+            }
+            });
+
             GridBagConstraints gbc = new GridBagConstraints();
+            // Set the constraints for the back button
             gbc.gridx = 0;
-            gbc.gridy = 0;
+            gbc.gridy = 0; // Adjust the row index according to your layout
+            gbc.anchor = GridBagConstraints.CENTER;
+            gbc.insets = new Insets(10, 0, 10, 0); // Adjust the insets as needed
+            // Add the back button to the main panel
+            mainPanel.add(backButton, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 1;
             gbc.fill = GridBagConstraints.VERTICAL;
-            gbc.insets = new Insets(30, 100, 10, 100); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
+            gbc.insets = new Insets(5, 100, 10, 100); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
             mainPanel.add(panelA, gbc);
     
-            gbc.gridy = 1;
+            gbc.gridy = 2;
             gbc.insets = new Insets(10, 100, 10, 100); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
             mainPanel.add(panelB, gbc);
     
-            gbc.gridy = 2;
-            gbc.insets = new Insets(10, 100, 30, 100); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
+            gbc.gridy = 3;
+            gbc.insets = new Insets(10, 100, 10, 100); // Jarak antara panel dengan tepi kanan-kiri-atas-bawah
             mainPanel.add(panelC, gbc);
+
+
 
             frame.add(mainPanel);
             frame.pack();
@@ -275,8 +300,6 @@ public class RoomFeature extends JFrame{
             frame.setLocationRelativeTo(null);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       }
-
-
 
 
       // room details & book panel 
@@ -300,6 +323,7 @@ public class RoomFeature extends JFrame{
             buttonback.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     frame.setVisible(false);
+                    showRoomCard();
                 }
               }); 
 
@@ -441,7 +465,7 @@ public class RoomFeature extends JFrame{
             JPanel panelB2C = new JPanel();
             panelB2C.setPreferredSize(new Dimension(450,100));
             panelB2C.setBackground(Color.WHITE);
-            panelB2C.setLayout(new GridLayout(2, 3));
+            panelB2C.setLayout(new GridLayout(3, 3));
             panelB2C.setBorder(new EmptyBorder(5,15,5,15));
 
             JLabel day = new JLabel("Days : ");
@@ -449,6 +473,11 @@ public class RoomFeature extends JFrame{
             JButton calculateButton = new JButton("Calculate");
             JLabel charges = new JLabel("Total Charges : "); 
             JLabel totalcharges = new JLabel(); 
+
+            JLabel userid = new JLabel("User ID : ");
+            JTextField user = new JTextField();
+
+            JLabel kosongan = new JLabel("");
 
             calculateButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e){
@@ -458,11 +487,16 @@ public class RoomFeature extends JFrame{
                 }
             });
 
+            // BOOKROOM BUTTON
+            
             panelB2C.add(day); 
             panelB2C.add(days); 
             panelB2C.add(calculateButton);
             panelB2C.add(charges); 
             panelB2C.add(totalcharges); 
+            panelB2C.add(kosongan); 
+            panelB2C.add(userid); 
+            panelB2C.add(user);
 
 
             // PANEL B2D
@@ -472,7 +506,29 @@ public class RoomFeature extends JFrame{
             panelB2D.setBackground(Color.WHITE);
             JButton bookroomButton = new JButton("BOOK ROOM");
             panelB2D.add(bookroomButton);
-            
+            bookroomButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                HotelProvider HotelDAO = new HotelProvider();
+                    String useriddText = user.getText();
+                    String roomNumberText = roomNo.getText();
+                    String hariText = days.getText();
+
+                    if (!useriddText.isEmpty() && !roomNumberText.isEmpty() && !hariText.isEmpty()) {
+                        int useridd = Integer.parseInt(useriddText);
+                        int roomNumber = Integer.parseInt(roomNumberText);
+                        int hari = Integer.parseInt(hariText);
+
+                        HotelDAO.placeRoomOrder(useridd, roomType, roomNumber, hari);
+
+                        JOptionPane.showMessageDialog(null, "Book Room Sucesses.", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                        frame.dispose();
+                        showRoomCard();
+                        // frame.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please fill the data correctly.", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            });
 
             // Panel B add
             panelB2.add(panelB2A);
@@ -507,10 +563,17 @@ public class RoomFeature extends JFrame{
 
 
 
+
+
       public static void main(String[] args) {
             RoomFeature a = new RoomFeature();
+            // a.bookRoom(0, 0, 0);
             // a.roomDetailsBook(2);
             a.showRoomCard();
+            // a.bookRoom("","","");
+
+            // HotelProvider hdao = new HotelProvider();
+            // System.out.println(hdao.placeRoomOrder(3, 1, 101, 4));
 
             // HotelProvider b = new HotelProvider(); 
             // // RoomDeluxe aby = (RoomDeluxe) b.roomDetails(2, 310);
@@ -525,9 +588,6 @@ public class RoomFeature extends JFrame{
             // System.out.println(ab.hitungHarga(4));
 
             // System.out.println(a.roomType);
-
-
-
 
 
       }

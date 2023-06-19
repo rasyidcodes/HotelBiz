@@ -121,6 +121,92 @@ public class HotelProvider implements HotelService {
     }
 
 
+    @Override
+    public boolean updateRoomAvailability(int roomType, int roomNumber, boolean Availability){
+
+        PreparedStatement statement = null;
+        String roomName = null; 
+
+            switch (roomType) {
+        case 1:
+            roomName = "standaRdroom";
+            break;
+        case 2:
+            roomName = "premiumRoom";
+            break;
+        case 3:
+            roomName = "deluxeRoom";
+            break;
+        }
+
+        // tipe 3 = deluxe, database roomType_id = 3
+        // tipe 2 = premium, database roomType_id = 2
+        // tipe 1 = standard, database roomType_id = 1
+
+        // 1 -> Available 
+        // 0 -> Not Available 
+
+            try {
+
+            DatabaseConnector connect = new DatabaseConnector();
+            Connection conn = connect.getConnection();
+
+            String sql = "UPDATE " + roomName + " SET availability = " + Availability + " WHERE roomNumber = " + roomNumber;
+
+            // String sql = "UPDATE " + roomName + " SET availability = ? WHERE roomNumber = ?";
+            // statement = conn.prepareStatement(sql);
+            // statement.setBoolean(1, Availability);
+            // statement.setInt(2, roomNumber);
+
+            statement = conn.prepareStatement(sql);
+            int insertCon = statement.executeUpdate();
+
+            if (insertCon > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("err" + e.getMessage());
+        }
+        return false;
+    }
+
+    
+
+    @Override
+    public boolean placeRoomOrder(int userid, int roomType, int roomNumber, int days) {
+        PreparedStatement statement = null;
+        // Mendapatkan tanggal saat ini
+        java.util.Date date = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+        try {
+
+            DatabaseConnector connect = new DatabaseConnector();
+            Connection conn = connect.getConnection();
+
+            String sql = "INSERT INTO roomorders (userID, roomTypeID, roomNumber, days, orderDate) VALUES ('" + userid + "', '" + roomType + "', '" + roomNumber + "', '" + days + "', '" + sqlDate + "')";
+            statement = conn.prepareStatement(sql);
+            // String sql = "INSERT INTO roomorders (userID, roomTypeID, roomNumber, days, orderDate) VALUES (?, ?, ?, ?, ?)";
+            // statement = conn.prepareStatement(sql);
+            // // statement.setInt(1, null);
+            // statement.setInt(2, userid);
+            // statement.setInt(3, roomType);
+            // statement.setInt(4, roomNumber);
+            // statement.setInt(5, days);
+            // statement.setDate(6, sqlDate);
+            int insertCon = statement.executeUpdate();
+            if (insertCon > 0) {
+                if(updateRoomAvailability(roomType, roomNumber, false)){
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("err" + e.getMessage());
+        }
+        return false;
+    }
+
+
     // =====================================================
     // specific room details based on room number
     @Override
