@@ -14,8 +14,11 @@ public class GuestMainPage {
     private JFrame loginFrame;
     private JTextField usernameField;
     private JPasswordField passwordField;
+    public static Guest guests;
 
     public GuestMainPage() {
+
+
         loginFrame = new JFrame("Guest Main Page");
         loginFrame.setSize(800, 600);
         loginFrame.setPreferredSize(new Dimension(800, 600));
@@ -55,9 +58,6 @@ public class GuestMainPage {
         });
 
 
-
-
-
         JLabel mainLabel = new JLabel("Guest Menu");
         mainLabel.setForeground(Color.white);
         mainLabel.setFont(new Font("High Tower Text", Font.BOLD, 40));
@@ -70,6 +70,7 @@ public class GuestMainPage {
 
         mainPanel.add(loginPanel, constraints);
 
+
         loginFrame.add(mainPanel);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.pack();
@@ -78,6 +79,8 @@ public class GuestMainPage {
     public void showLoginForm() {
         loginFrame.setVisible(true);
     }
+
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

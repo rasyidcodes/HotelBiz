@@ -3,6 +3,7 @@ package pages.admin.addRoom;
 import config.DatabaseConnector;
 
 import java.sql.*;
+import java.util.Objects;
 import java.util.Vector;
 
 public class AddRoomProvider implements  AddRoomsInterface{
@@ -109,8 +110,85 @@ public class AddRoomProvider implements  AddRoomsInterface{
         DatabaseConnector databaseConnector = new DatabaseConnector();
         Connection conn = databaseConnector.getConnection();
 
-        PreparedStatement ps = null;
+        System.out.println(roomtypeselected);
+
+
+        if (Objects.equals(roomtypeselected, "Standard Room")){
+            System.out.println("ini standard");
+
+                    PreparedStatement ps = null;
+            try {
+                ps = conn.prepareStatement("INSERT INTO standardroom(roomtype_id,roomNumber,availability,freeSnack, wifi) VALUES (?,?,?,?,?)");
+                ps.setInt(1, 1);
+                ps.setInt(2, roomNumber);
+                ps.setInt(3, 1);
+                ps.setInt(4, 1);
+                ps.setInt(5,1);
+
+                if (ps.executeUpdate() > 0) {
+                    return true;
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return false;
+        }
+        if (Objects.equals(roomtypeselected, "Premium Room")){
+            System.out.println("ini premium");
+
+            PreparedStatement ps = null;
+            try {
+                ps = conn.prepareStatement("INSERT INTO premiumroom(roomtype_id,roomNumber,availability,freeSnack, wifi,television, fitnessCenter, minibar) VALUES (?,?,?,?,?,?,?,?)");
+                ps.setInt(1, 2);
+                ps.setInt(2, roomNumber);
+                ps.setInt(3, 1);
+                ps.setInt(4, 1);
+                ps.setInt(5,1);
+                ps.setInt(6,1);
+                ps.setInt(7,1);
+                ps.setInt(8,1);
+
+                if (ps.executeUpdate() > 0) {
+                    return true;
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return false;
+
+        }
+        if (Objects.equals(roomtypeselected, "Deluxe Room")){
+            System.out.println("Ini deluxe");
+
+            PreparedStatement ps = null;
+            try {
+                ps = conn.prepareStatement("INSERT INTO deluxeroom(roomtype_id,roomNumber,availability,freeSnack, wifi,television, fitnessCenter, minibar, inRoomBreakfastService, laundry, dailyHouseKeeping, privateSwimming, luxuryBathub) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                ps.setInt(1, 3);
+                ps.setInt(2, roomNumber);
+                ps.setInt(3, 1);
+                ps.setInt(4, 1);
+                ps.setInt(5,1);
+                ps.setInt(6,1);
+                ps.setInt(7,1);
+                ps.setInt(8,1);
+                ps.setInt(9,1);
+                ps.setInt(10,1);
+                ps.setInt(11,1);
+                ps.setInt(12,1);
+                ps.setInt(13,1);
+
+                if (ps.executeUpdate() > 0) {
+                    return true;
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return false;
+
+        }
         return true;
+//        PreparedStatement ps = null;
+//        return true;
 
 //        try {
 //            ps = conn.prepareStatement("INSERT INTO roomtype(roomtype_id,roomName,bedType,Price) VALUES (?,?,?,?)");

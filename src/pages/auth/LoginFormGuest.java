@@ -1,6 +1,8 @@
 package pages.auth;
 
 import config.DatabaseConnector;
+import pages.guest.GuestMainPage;
+import pages.guest.bookRoom.RoomFeature;
 import pages.guest.orderFood.OrderFood;
 
 import javax.swing.*;
@@ -53,6 +55,15 @@ public class LoginFormGuest {
                     // Authentication successful
                     JOptionPane.showMessageDialog(loginFrame, "Login successful!\nWelcome, " + user.getFullName(),
                             "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                    loginFrame.dispose();
+                    //SET PROPS
+                    GuestMainPage.guests = user;
+                    OrderFood.guest = user;
+                    RoomFeature.guest = user;
+
+                    GuestMainPage guestMainPage = new GuestMainPage();
+                    guestMainPage.showLoginForm();
 
                     // Display the next form
 //                    nextForm.setVisible(true);

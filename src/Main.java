@@ -44,7 +44,6 @@ public class Main extends JFrame {
         // Create a JLabel with an image for the splash screen
         URL imageURL =  Main.class.getResource("/drawable/logo_splash.png");
         ImageIcon splashImageIcon = new ImageIcon(imageURL);
-
         JLabel splashLabel = new JLabel(splashImageIcon);
 
         splashFrame.getContentPane().add(splashLabel);

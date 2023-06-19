@@ -1,5 +1,7 @@
 package pages.guest.bookRoom;
 
+import pages.auth.Guest;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -35,6 +37,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class RoomFeature extends JFrame{
 
+    public  static Guest guest;
     //   1 standard. 2 premium. 3 deluxe.
 
     // show room card

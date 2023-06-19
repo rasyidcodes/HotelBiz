@@ -173,8 +173,15 @@ public class AddRoom extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String roomtypeselected = roomtypecombo.getSelectedItem().toString();
                 int roomNumber = Integer.valueOf(tf_roomnumber.getText());
-                System.out.println(roomtypeselected);
-                roomsProvider.addRooms(roomNumber, roomtypeselected);
+                if (roomsProvider.addRooms(roomNumber, roomtypeselected)){
+                    try {
+                        displayRooms();
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }else {
+                    System.out.println("failed to insert");
+                }
             }
         });
 

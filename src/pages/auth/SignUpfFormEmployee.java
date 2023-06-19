@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import config.DatabaseConnector;
+import pages.admin.AdminMainPage;
+
 public class SignUpfFormEmployee {
     private JFrame signUpFrame;
     private JTextField usernameField;
@@ -127,6 +129,10 @@ public class SignUpfFormEmployee {
                                 // Authentication successful
                                 JOptionPane.showMessageDialog(signUpFrame, "Signup successful!\nWelcome, " + user.getFullName(),
                                         "Success", JOptionPane.INFORMATION_MESSAGE);
+                                signUpFrame.dispose();
+                                AdminMainPage adminMainPage =  new AdminMainPage();
+                                adminMainPage.showLoginForm();
+
                             } else {
                                 // Authentication failed
                                 JOptionPane.showMessageDialog(signUpFrame, "Failed to create account!", "Error",

@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import config.DatabaseConnector;
+import pages.guest.GuestMainPage;
+import pages.guest.bookRoom.RoomFeature;
+import pages.guest.orderFood.OrderFood;
+
 public class SignUpFormGuest {
     private JFrame signUpFrame;
     private JTextField usernameField;
@@ -134,6 +138,13 @@ public class SignUpFormGuest {
                                 // Authentication successful
                                 JOptionPane.showMessageDialog(signUpFrame, "Signup successful!\nWelcome, " + user.getGuestType(),
                                         "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                                GuestMainPage.guests = user;
+                                OrderFood.guest = user;
+                                RoomFeature.guest = user;
+
+                                GuestMainPage guestMainPage = new GuestMainPage();
+                                guestMainPage.showLoginForm();
                             } else {
                                 // Authentication failed
                                 JOptionPane.showMessageDialog(signUpFrame, "Invalid username or password!", "Error",

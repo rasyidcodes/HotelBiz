@@ -23,7 +23,7 @@ public class OrderFood extends JFrame{
 
     //combobox
     JComboBox<String> comboBoxTopping;
-
+    public  static  Guest guest;
     //button group
     ButtonGroup buttonGroupSugar;
     ButtonGroup buttonGroupICE;
@@ -304,9 +304,9 @@ public class OrderFood extends JFrame{
                     area.setText(area.getText()+"***               YOUR BILL RECEIPT        	    ***\n");
                     area.setText(area.getText()+"***********************************************\n\n");
                     area.setText(area.getText()+"TIME     : "+sf.format(dt)+"\n\n");
-                    area.setText(area.getText()+"NAME     :    "+"Rasyid"+"\n\n");
-                    area.setText(area.getText()+"ADDRESS  :    "+"kalirase"+"\n\n");
-                    area.setText(area.getText()+"PHONE NUM  :    "+"087867677"+"\n\n");
+                    area.setText(area.getText()+"NAME     :    "+ guest.getFullName() +"\n\n");
+                    area.setText(area.getText()+"ADDRESS  :    "+ guest.getAddress() +"\n\n");
+                    area.setText(area.getText()+"PHONE NUM  :    "+ guest.getPhoneNumber() +"\n\n");
                     area.setText(area.getText()+"ORDERED DISH  : "+selectedDish.getItemName()+"\n\n");
                     area.setText(area.getText()+"DESCRIPTION  : "+selectedDish.getDescription()+"\n\n");
                     area.setText(area.getText()+"ORDERED DRINK  : "+selectedDrink.getItemName()+"\n\n");
@@ -390,7 +390,7 @@ public class OrderFood extends JFrame{
 
             }
         });
-        btnCheckout.setFont(new Font("High Tower Text", Font.BOLD, 21));
+//        btnCheckout.setFont(new Font("High Tower Text", Font.BOLD, 21));
         btnCheckout.setBounds(930, 673, 207, 39);
         contentPane.add(btnCheckout);
 
@@ -573,7 +573,7 @@ public class OrderFood extends JFrame{
         }
         else{
             MenuProvider menuProvider = new MenuProvider();
-            boolean res = menuProvider.checkoutMenu("rasyid","kalirase",98889999, selectedDish.getItemName(),selectedDrink.getItemName(), Integer.valueOf(valueTotal.getText()), selectedDish.getDescription() + " "+ selectedDrink.getDescription(), 1);
+            boolean res = menuProvider.checkoutMenu(guest.getFullName(),guest.getAddress(),1982, selectedDish.getItemName(),selectedDrink.getItemName(), Integer.valueOf(valueTotal.getText()), selectedDish.getDescription() + " "+ selectedDrink.getDescription(), 1);
             if (res){
                 System.out.println("sukses");
             }else {
