@@ -2,6 +2,7 @@ package pages.admin;
 
 import pages.admin.addMenu.Menu;
 import pages.admin.addRoom.AddRoom;
+import pages.auth.LoginFormEmployee;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +28,7 @@ public class AdminMainPage {
         constraints.weighty = 1.0;
         constraints.anchor = GridBagConstraints.CENTER;
 
-        JPanel loginPanel = new JPanel(new GridLayout(4, 1, 10, 30));
+        JPanel loginPanel = new JPanel(new GridLayout(5, 1, 10, 30));
         loginPanel.setBackground(new Color(155, 89, 182));
 
 
@@ -53,6 +54,16 @@ public class AdminMainPage {
             }
         });
 
+        JButton logoutButton = new JButton("Logout");
+
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loginFrame.dispose();
+                LoginFormEmployee loginFormEmployee = new LoginFormEmployee();
+                loginFormEmployee.showLoginForm();
+            }
+        });
 
         JLabel mainLabel = new JLabel("Admin Menu");
         mainLabel.setForeground(Color.white);
@@ -62,6 +73,7 @@ public class AdminMainPage {
         loginPanel.add(mainLabel);
         loginPanel.add(editRoomButton);
         loginPanel.add(editMenuButton); // Empty label for spacing
+        loginPanel.add(logoutButton);
 
 
         mainPanel.add(loginPanel, constraints);

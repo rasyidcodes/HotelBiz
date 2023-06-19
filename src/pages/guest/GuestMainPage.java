@@ -32,13 +32,14 @@ public class GuestMainPage {
         constraints.weighty = 1.0;
         constraints.anchor = GridBagConstraints.CENTER;
 
-        JPanel loginPanel = new JPanel(new GridLayout(3, 1, 10, 30));
+        JPanel loginPanel = new JPanel(new GridLayout(4, 1, 10, 30));
         loginPanel.setBackground(new Color(155, 89, 182));
 
 
 
         JButton orderRoomButton = new JButton("Order Room");
         JButton orderMenuButton = new JButton("Order Menu");
+        JButton LogoutButton = new JButton("Logout");
         orderMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -57,6 +58,14 @@ public class GuestMainPage {
             }
         });
 
+        LogoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loginFrame.dispose();
+                LoginFormGuest loginFormGuest = new LoginFormGuest();
+                loginFormGuest.showLoginForm();
+            }
+        });
 
         JLabel mainLabel = new JLabel("Guest Menu");
         mainLabel.setForeground(Color.white);
@@ -66,6 +75,7 @@ public class GuestMainPage {
         loginPanel.add(mainLabel);
         loginPanel.add(orderRoomButton);
         loginPanel.add(orderMenuButton); // Empty label for spacing
+        loginPanel.add(LogoutButton);
 
 
         mainPanel.add(loginPanel, constraints);
