@@ -387,7 +387,6 @@ public class OrderFood extends JFrame{
         btnCheckout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 checkOut();
-
             }
         });
 //        btnCheckout.setFont(new Font("High Tower Text", Font.BOLD, 21));
@@ -576,6 +575,7 @@ public class OrderFood extends JFrame{
             boolean res = menuProvider.checkoutMenu(guest.getFullName(),guest.getAddress(),1982, selectedDish.getItemName(),selectedDrink.getItemName(), Integer.valueOf(valueTotal.getText()), selectedDish.getDescription() + " "+ selectedDrink.getDescription(), 1);
             if (res){
                 System.out.println("sukses");
+                JOptionPane.showMessageDialog(contentPane, "Checkout Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             }else {
                 System.out.println("gagal");
             }

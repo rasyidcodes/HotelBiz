@@ -2,6 +2,7 @@ package pages.admin.addMenu;
 
 
 import config.DatabaseConnector;
+import pages.admin.AdminMainPage;
 
 import java.awt.*;
 
@@ -158,8 +159,9 @@ public class Menu extends JFrame {
         btnBack.setIcon(new ImageIcon("images\\back.png"));
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 setVisible(false);
+                AdminMainPage adminMainPage = new AdminMainPage();
+                adminMainPage.showLoginForm();
             }
         });
 //        btnBack.setFont(new Font("High Tower Text", Font.BOLD, 20));

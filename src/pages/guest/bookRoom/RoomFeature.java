@@ -477,6 +477,7 @@ public class RoomFeature extends JFrame{
         JLabel userid = new JLabel("User ID : ");
         JTextField user = new JTextField();
         user.setText(String.valueOf(guest.getId()));
+        user.setEditable(false);
         JLabel kosongan = new JLabel("");
 
         calculateButton.addActionListener(new ActionListener() {

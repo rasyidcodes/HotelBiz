@@ -148,7 +148,7 @@ public class SignUpfFormEmployee {
                         }
 
                     } catch (NumberFormatException x) {
-                        JOptionPane.showMessageDialog(signUpFrame, "Age must number!", "Error",
+                        JOptionPane.showMessageDialog(signUpFrame, "Invalid input!", "Error",
                                 JOptionPane.ERROR_MESSAGE);
                     }
                 }
