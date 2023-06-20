@@ -136,18 +136,19 @@ public class SignUpFormGuest {
 
                             if (user != null) {
                                 // Authentication successful
-                                JOptionPane.showMessageDialog(signUpFrame, "Signup successful!\nWelcome, " + user.getGuestType(),
+                                JOptionPane.showMessageDialog(signUpFrame, "Signup successful!\nWelcome, " + user.getFullName(),
                                         "Success", JOptionPane.INFORMATION_MESSAGE);
 
                                 GuestMainPage.guests = user;
                                 OrderFood.guest = user;
                                 RoomFeature.guest = user;
 
+                                signUpFrame.dispose();
                                 GuestMainPage guestMainPage = new GuestMainPage();
                                 guestMainPage.showLoginForm();
                             } else {
                                 // Authentication failed
-                                JOptionPane.showMessageDialog(signUpFrame, "Invalid username or password!", "Error",
+                                JOptionPane.showMessageDialog(signUpFrame, "Sign Up failed!", "Error",
                                         JOptionPane.ERROR_MESSAGE);
                             }
 
