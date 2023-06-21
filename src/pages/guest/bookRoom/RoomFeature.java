@@ -127,7 +127,7 @@ public class RoomFeature extends JFrame{
         buttonRoomA.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 roomDetailsBook(3);
-                // frame.dispose();
+                 frame.dispose();
             }
         });
         subpanelA2.add(buttonRoomA);
@@ -192,6 +192,7 @@ public class RoomFeature extends JFrame{
         buttonRoomB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 roomDetailsBook(2);
+                frame.dispose();
             }
         });
         subpanelB2.add(buttonRoomB);
@@ -250,6 +251,7 @@ public class RoomFeature extends JFrame{
         buttonRoomC.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 roomDetailsBook(1);
+                frame.dispose();
             }
         });
         subpanelC2.add(buttonRoomC);
@@ -324,6 +326,7 @@ public class RoomFeature extends JFrame{
         buttonback.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                showRoomCard();
             }
         });
 
